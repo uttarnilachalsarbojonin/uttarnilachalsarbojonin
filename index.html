@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>উত্তর নীলাচল সর্বজনীন দুর্গোৎসব কমিটি</title>
+<meta name="description" content="উত্তর নীলাচল সর্বজনীন দুর্গোৎসব কমিটির অফিসিয়াল ওয়েবসাইট">
+<style>
+:root{
+  --maroon:#650b13;--deep:#35050b;--red:#b51222;--gold:#ffd447;
+  --cream:#fff8e7;--text:#291b1b;--white:#fff;--green:#159b65;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans Bengali","Hind Siliguri",system-ui,sans-serif;background:#f6eee4;color:var(--text);line-height:1.65}
+a{text-decoration:none;color:inherit}
+.container{width:min(1440px,96%);margin:auto}
+.topline{background:#260308;color:#ffe7a2;padding:6px 0;font-size:13px}
+.topline .container{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+header{background:linear-gradient(120deg,#fff3cf,#f8d77a 45%,#8f111b);color:#fff;padding:16px 0;border-bottom:5px solid var(--gold)}
+.brand{display:flex;align-items:center;gap:18px}
+.logo{width:112px;height:112px;border-radius:50%;border:5px solid #fff4bb;background:#fff;display:grid;place-items:center;overflow:hidden;box-shadow:0 5px 18px #0004}
+.logo span{font-size:48px}
+.brand h1{font-size:clamp(24px,3.2vw,52px);color:#a20e1c;text-shadow:1px 1px #fff;font-weight:900}
+.brand h2{font-size:clamp(14px,1.6vw,25px);color:#1d1510;margin-top:2px}
+.brand p{font-size:14px;color:#40241b}
+.durga-art{margin-left:auto;font-size:95px;filter:drop-shadow(0 6px 8px #0005)}
+nav{background:linear-gradient(90deg,#780b17,#b20e20,#780b17);border-bottom:3px solid #f4c53b;position:sticky;top:0;z-index:20}
+.nav-inner{display:flex;align-items:center;gap:4px;overflow:auto}
+.nav-inner a{color:#fff;padding:13px 15px;white-space:nowrap;font-weight:700;font-size:14px}
+.nav-inner a:hover,.nav-inner a.active{background:var(--gold);color:#3b070d;border-radius:8px}
+.admin-btn{margin-left:auto;background:var(--gold)!important;color:#3b070d!important;border-radius:8px}
+.layout{display:grid;grid-template-columns:220px 1fr 280px;gap:14px;margin:16px auto}
+.side-card,.card{background:#fff;border-radius:14px;box-shadow:0 5px 20px #5a130f14;overflow:hidden;border:1px solid #ead4b5}
+.side-title,.card-title{background:linear-gradient(90deg,#ffe16b,#f5b929);color:#3a0a0f;font-weight:900;padding:11px 15px;font-size:18px}
+.side-menu a{display:block;padding:12px 15px;border-bottom:1px solid #f0e1d4;color:#6b101a;font-weight:700}
+.side-menu a:hover{background:#fff2c2}
+.quote{background:linear-gradient(160deg,#fff2c8,#f6c85b);padding:20px;text-align:center;color:#65101a;font-weight:900;font-size:18px}
+.hero{position:relative;min-height:390px;border-radius:16px;overflow:hidden;background:radial-gradient(circle at 72% 40%,#ffcf70 0,#7b1416 30%,#24040a 90%);color:#fff;display:flex;align-items:center;padding:42px}
+.hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 12% 20%,#ffb44d55 0 2px,transparent 3px),radial-gradient(circle at 30% 70%,#ffd76d55 0 2px,transparent 3px);background-size:38px 38px;opacity:.7}
+.hero-copy{position:relative;z-index:1;max-width:58%}
+.hero small{color:#ffe17c;font-size:20px;font-weight:800}
+.hero h2{font-size:clamp(34px,5vw,72px);line-height:1.15;color:#ffd64d;margin:10px 0;text-shadow:2px 3px 0 #4a080d}
+.hero p{font-size:18px;color:#fff6df}
+.hero-art{position:absolute;right:3%;bottom:-20px;font-size:270px;filter:drop-shadow(0 8px 14px #0008)}
+.countdown{display:flex;gap:8px;margin-top:22px;flex-wrap:wrap}
+.countdown div{background:#0008;border:1px solid #f9d56d;border-radius:10px;padding:8px 15px;text-align:center;min-width:76px}
+.countdown b{display:block;color:#ffd54f;font-size:25px}
+.countdown span{font-size:12px}
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}
+.quick{border-radius:13px;padding:22px 10px;text-align:center;color:#fff;min-height:150px;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.quick:nth-child(1){background:#c52334}.quick:nth-child(2){background:#1676c8}.quick:nth-child(3){background:#159d69}.quick:nth-child(4){background:#ee7c21}
+.quick .icon{font-size:34px}.quick b{font-size:18px}.quick button{background:#fff;border:0;border-radius:6px;padding:5px 10px;color:#5d1117;font-weight:800;cursor:pointer}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.card-body{padding:17px}
+.about-preview{max-height:245px;overflow:hidden;position:relative;transition:max-height .25s ease}
+.about-preview.expanded{max-height:none}
+.about-read-btn{margin-top:12px}
+.notice-item,.event-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px dashed #ddc6ae}
+.date-box{background:#8d101c;color:#fff;border-radius:8px;min-width:55px;text-align:center;padding:5px;font-weight:900}
+.date-box b{font-size:22px;display:block;color:#ffd44f}
+.btn{display:inline-block;background:#8c101b;color:#fff;padding:8px 17px;border-radius:7px;font-weight:800;border:0;cursor:pointer}
+.member-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.member{text-align:center;padding:12px;background:#fff9f0;border-radius:10px}
+.avatar{width:78px;height:78px;border-radius:50%;margin:auto;background:linear-gradient(135deg,#eee,#b5b5b5);display:grid;place-items:center;font-size:42px;border:4px solid #fff;box-shadow:0 2px 7px #0002}
+.member b{display:block;color:#7d0f18;margin-top:5px}
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.gallery .placeholder-tile{height:105px;border-radius:9px;display:grid;place-items:center;font-size:42px;background:linear-gradient(135deg,#6b1118,#e6a52c);color:#ffe9a0}
+.qr{background:#fff;text-align:center;padding:15px}
+.qr .fakeqr{font-size:100px;line-height:1;color:#111}
+.footer{background:linear-gradient(90deg,#39050b,#7b0c17);color:#fff5d8;margin-top:25px;padding:28px 0;border-top:5px solid var(--gold)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px}
+.footer h3{color:#ffd44d;margin-bottom:8px}
+.social{display:flex;gap:10px;margin-top:12px}.social span{width:36px;height:36px;border-radius:50%;background:#fff;color:#850f1a;display:grid;place-items:center;font-weight:900}
+.modal{display:none;position:fixed;inset:0;background:#0009;z-index:50;place-items:center;padding:15px}
+.modal.open{display:grid}
+.modal-box{background:#fff;border-radius:15px;width:min(430px,100%);padding:25px}
+.modal-box input{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;margin:10px 0}
+.admin-panel{display:none;background:#fff2bd;border:2px solid #d4a20d;padding:15px;border-radius:12px;margin:14px 0}
+.admin-panel.show{display:block}
+@media(max-width:1100px){.layout{grid-template-columns:190px 1fr}.layout>aside:last-child{grid-column:1/-1}.layout>aside:last-child .side-card{display:inline-block;width:49%;vertical-align:top}.hero-art{font-size:210px}.brand .durga-art{display:none}}
+@media(max-width:720px){.topline .container{justify-content:center}.brand{gap:10px}.logo{width:75px;height:75px}.logo span{font-size:32px}.brand h1{font-size:21px}.brand h2{font-size:12px}.brand p{font-size:10px}.layout{display:block}.layout>aside{margin-bottom:14px}.side-menu{display:grid;grid-template-columns:1fr 1fr}.side-menu a{font-size:12px;padding:8px}.hero{min-height:360px;padding:25px}.hero-copy{max-width:100%}.hero h2{font-size:42px}.hero-art{font-size:150px;opacity:.32}.quick-grid{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}.member-grid{grid-template-columns:repeat(3,1fr)}.member{padding:5px;font-size:11px}.avatar{width:58px;height:58px;font-size:30px}.footer-grid{grid-template-columns:1fr}.layout>aside:last-child .side-card{display:block;width:100%}}
+
+.admin-section{background:#fff;border:1px solid #e6d2b5;border-radius:12px;padding:15px;margin:14px 0}
+.admin-section h3{color:#7d0f18;margin-bottom:8px}
+.admin-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.admin-grid input,.admin-grid textarea,.admin-grid select{width:100%;padding:10px;border:1px solid #d8c5b0;border-radius:8px}
+.admin-list{margin-top:10px}
+.admin-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px;border-bottom:1px dashed #decbb8}
+.admin-row small{display:block;color:#765}
+.admin-row button{margin:2px;padding:6px 10px}
+@media(max-width:720px){.admin-grid{grid-template-columns:1fr}.admin-row{align-items:flex-start;flex-direction:column}}
+
+
+/* Mobile navigation and reliable section navigation */
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+[id] { scroll-margin-top: 90px; }
+nav { position: sticky; top: 0; z-index: 1000; }
+.nav-inner { overflow-x: auto; overflow-y: hidden; white-space: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+.nav-inner a { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; flex: 0 0 auto; }
+.side-menu a, .footer a { cursor: pointer; }
+@media(max-width:720px){
+  .nav-inner { justify-content: flex-start; gap: 2px; }
+  .nav-inner a { padding: 12px 16px; font-size: 15px; }
+}
+
+</style>
+</head>
+<body>
+<div class="topline"><div class="container"><span>🙏 শারদীয়ার আনন্দে একসাথে</span><span>📍 North Nilachal, Birati, Kolkata</span></div></div>
+
+<header>
+  <div class="container brand">
+    <div class="logo"><span>🪔</span></div>
+    <div>
+      <h1>উত্তর নীলাচল সর্বজনীন দুর্গোৎসব কমিটি</h1>
+      <h2>Uttar Nilachal Sarbojonin Durga Utsav Committee</h2>
+      <p>স্থাপিত: ১৯৯৩ | North Nilachal, Birati, Kolkata - 134</p>
+    </div>
+    <div class="durga-art">🌺</div>
+  </div>
+</header>
+
+<nav><div class="container nav-inner">
+  <a class="active" href="#home">⌂ হোম</a><a href="#about">আমাদের কথা</a><a href="#committee">কমিটি</a>
+  <a href="#events">অনুষ্ঠানসূচি</a><a href="#notices">নোটিশ</a><a href="#gallery" onclick="revealGallery()">ছবির গ্যালারি</a>
+  <a href="#donate">সহযোগিতা</a><a href="#contact">যোগাযোগ</a><a id="adminNavLink" class="admin-btn" href="#" onclick="handleAdminNavClick();return false">🔒 অ্যাডমিন লগইন</a>
+</div></nav>
+
+<main class="container layout" id="home">
+  <aside>
+    <div class="side-card"><div class="side-title">মেনু</div><div class="side-menu">
+      <a href="#home">🏠 স্বাগতম</a><a href="#about">📖 আমাদের কথা</a><a href="#committee">👥 কমিটি পরিচিতি</a>
+      <a href="#events">🗓 অনুষ্ঠানসূচি</a><a href="#notices">📢 নোটিশ ও খবর</a><a href="#gallery" onclick="revealGallery()">🖼 ছবির গ্যালারি</a>
+      <a href="#committee">👨‍👩‍👧 সদস্যবৃন্দ</a><a href="#donate">❤️ সহযোগিতা / দান</a><a href="#contact">☎ যোগাযোগ</a>
+    </div></div>
+    <div class="side-card" style="margin-top:14px"><div class="quote">“সংস্কৃতির মাধ্যমে গড়ে উঠুক একতাবদ্ধ সমাজ”<br><br>🌾<br><small>উত্তর নীলাচল সর্বজনীন দুর্গোৎসব কমিটি</small></div></div>
+  </aside>
+
+  <section>
+    <div class="hero">
+      <div class="hero-copy">
+        <small>🌼 শারদীয়ার আনন্দে একসাথে 🌼</small>
+        <h2>মা আসছেন...</h2>
+        <p>সংস্কৃতি • ঐতিহ্য • সম্প্রীতি</p>
+        <div class="countdown"><div><b>২৮</b><span>দিন</span></div><div><b>১২</b><span>ঘণ্টা</span></div><div><b>৩৭</b><span>মিনিট</span></div><div><b>০৯</b><span>সেকেন্ড</span></div></div>
+      </div><div class="hero-art">🙏</div>
+    </div>
+
+    <div class="quick-grid">
+      <div class="quick"><div class="icon">🗓</div><b>অনুষ্ঠানসূচি</b><span>পূজার দিনের সময়সূচি</span><button onclick="location.hash='events'">বিস্তারিত দেখুন</button></div>
+      <div class="quick"><div class="icon">🖼</div><b>ছবির গ্যালারি</b><span>পুরোনো ও নতুন ছবি</span><button onclick="revealGallery();location.hash='gallery'">গ্যালারি দেখুন</button></div>
+      <div class="quick"><div class="icon">👥</div><b>কমিটি পরিচিতি</b><span>আমাদের কমিটি সদস্য</span><button onclick="location.hash='committee'">বিস্তারিত দেখুন</button></div>
+      <div class="quick"><div class="icon">❤️</div><b>সহযোগিতা / দান</b><span>পূজার কাজে সাহায্য করুন</span><button onclick="location.hash='donate'">সহযোগিতা করুন</button></div>
+    </div>
+
+    <div class="two-col">
+      <div class="card" id="about"><div class="card-title">📖 আমাদের কথা</div><div class="card-body">
+        <p id="publicAboutText" class="about-preview">উত্তর নীলাচল সর্বজনীন দুর্গোৎসব কমিটি একটি সামাজিক ও সাংস্কৃতিক সংগঠন। আমাদের লক্ষ্য হলো দুর্গাপূজার আনন্দের মাধ্যমে সংস্কৃতি, ঐতিহ্য, সম্প্রীতি ও মানবিক মূল্যবোধকে আরও শক্তিশালী করা।</p><button type="button" id="aboutReadMoreBtn" class="btn about-read-btn" onclick="toggleAboutText()">আরও পড়ুন</button>
+      </div></div>
+      <div class="card" id="events"><div class="card-title">🗓 আসন্ন অনুষ্ঠানসূচি</div><div class="card-body">
+        <div id="publicEventsList">
+          <div class="event-item"><div class="date-box"><b>২৮</b>সেপ্টে</div><div><b>মহালয়া</b><br><small>ভোর ৮.০০ — বিশেষ সম্প্রচার</small></div></div>
+          <div class="event-item"><div class="date-box"><b>০৯</b>অক্টো</div><div><b>ষষ্ঠী পূজা</b><br><small>সন্ধ্যা ৬.০০ — বোধন ও আমন্ত্রণ</small></div></div>
+          <div class="event-item"><div class="date-box"><b>১০</b>অক্টো</div><div><b>সপ্তমী পূজা</b><br><small>সকাল ৮.০০ — নবপত্রিকা স্নান</small></div></div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="card" id="committee"><div class="card-title">👥 কমিটি সদস্যবৃন্দ (সংক্ষেপে)</div><div class="card-body"><div id="publicMemberGrid" class="member-grid">
+      <div class="member"><div class="avatar">👨</div><b>সুকল্যান মিত্র</b><small>সভাপতি</small></div>
+      <div class="member"><div class="avatar">👨</div><b>অমল সোম</b><small>সহ-সভাপতি</small></div>
+      <div class="member"><div class="avatar">👨</div><b>রাকেশ সরকার</b><small>সম্পাদক</small></div>
+      <div class="member"><div class="avatar">👨</div><b>প্রদীপ দে</b><small>সহ-সম্পাদক</small></div>
+      <div class="member"><div class="avatar">👨</div><b>মৃণাল রায়</b><small>কোষাধ্যক্ষ</small></div>
+      <div class="member"><div class="avatar">👨</div><b>শুভাশিস দাস</b><small>আয়োজক ও সমন্বয়</small></div>
+    </div></div></div>
+
+    <div class="card" id="gallery" style="margin-top:14px;display:none"><div class="card-title">🖼 ছবির গ্যালারি</div><div class="card-body"><div id="publicGalleryGrid" class="gallery">
+      <div class="placeholder-tile">🪔</div><div class="placeholder-tile">🌺</div><div class="placeholder-tile">🙏</div><div class="placeholder-tile">🎉</div><div class="placeholder-tile">🥁</div><div class="placeholder-tile">✨</div>
+    </div><p id="galleryEmptyText" style="margin-top:12px;color:#777">অ্যাডমিন প্যানেল থেকে ছবি আপলোড করলে এখানে দেখা যাবে।</p></div></div>
+  </section>
+
+  <aside>
+    <div class="side-card" id="notices"><div class="side-title">📢 গুরুত্বপূর্ণ নোটিশ</div><div class="card-body">
+      <div class="notice-item"><div class="date-box"><b>২০</b>সেপ্টে</div><div><b>পূজা প্রস্তুতি সভা</b><br><small>সন্ধ্যা ৭টা</small></div></div>
+      <div class="notice-item"><div class="date-box"><b>১৫</b>সেপ্টে</div><div><b>অনুদান সংগ্রহ চলছে</b><br><small>আপনার সহযোগিতা কাম্য</small></div></div>
+      <div class="notice-item"><div class="date-box"><b>১০</b>সেপ্টে</div><div><b>শিল্পী তালিকা প্রকাশ</b><br><small>বিশেষ সাংস্কৃতিক অনুষ্ঠান</small></div></div>
+    </div></div>
+    <div class="side-card" style="margin-top:14px"><div class="side-title">🖼 ছবির গ্যালারি</div><div class="card-body"><div class="gallery"><div class="placeholder-tile">🌺</div><div class="placeholder-tile">🪔</div><div class="placeholder-tile">🙏</div><div class="placeholder-tile">🎊</div></div><br><a class="btn" href="#gallery" onclick="revealGallery(); return true;">ছবির গ্যালারি দেখুন</a></div></div>
+    <div class="side-card" id="donate" style="margin-top:14px">
+  <div class="side-title">🤝 সহযোগিতা করুন</div>
+  <div class="qr">
+    <p>আপনার অনুদান আমাদের পূজার কাজে সাহায্য করবে।</p>
+    <div id="publicQrSection" style="margin:14px auto;display:block;text-align:center">
+      <img id="publicQrCode" alt="অনুদানের QR Code" style="display:none;max-width:240px;width:100%;height:auto;border:1px solid #ddd;border-radius:12px;padding:8px;background:#fff">
+      <div id="qrPlaceholder" class="fakeqr">▦</div>
+    </div>
+    <b>UPI / Razorpay / Bank Transfer</b>
+    <p><small id="qrHelpText">অ্যাডমিন প্যানেল থেকে প্রকৃত QR কোড যুক্ত করা যাবে।</small></p>
+  </div>
+</div>
+  </aside>
+</main>
+
+<section class="container admin-panel" id="adminPanel">
+  <b>অ্যাডমিন মোড সক্রিয়</b>
+  <p id="supabaseStatus" style="font-weight:800">Supabase সংযোগ পরীক্ষা করা হচ্ছে...</p>
+
+  <div class="admin-section">
+    <h3>⚙️ সাইট সেটিংস</h3>
+    <div class="admin-grid">
+      <div><label>সাইটের শিরোনাম</label><input id="settingSiteTitle" value="উত্তর নীলাচল সর্বজনীন দুর্গোৎসব কমিটি"></div>
+      <div><label>ইমেইল</label><input id="settingEmail" value="uttarnilachal.sarbojonin@gmail.com"></div>
+      <div style="grid-column:1/-1"><label>পরিচিতি</label><textarea id="settingAbout" rows="3">উত্তর নীলাচল সর্বজনীন দুর্গোৎসব কমিটি একটি সামাজিক ও সাংস্কৃতিক সংগঠন।</textarea></div>
+      <div><label>QR Code ছবি (সর্বোচ্চ ৫০ KB)</label><input id="qrCodeFile" type="file" accept="image/*"></div>
+      <div><label>QR Code URL (ঐচ্ছিক)</label><input id="qrCodeUrl" placeholder="https://..."></div>
+      <div style="grid-column:1/-1"><label>ঠিকানা</label><input id="settingAddress" value="North Nilachal, Birati, Kolkata - 134"></div>
+    </div>
+    <br><button class="btn" onclick="saveAllSettings()">সেটিংস সেভ</button><button class="btn" onclick="saveQrCode()">QR Code সেভ করুন</button>
+    <button class="btn" onclick="applyAboutText(document.getElementById('settingAbout').value)">প্রিভিউ দেখুন</button><button class="btn" onclick="loadAllSettings()">সেটিংস লোড</button>
+  </div>
+
+  <div class="admin-section">
+    <h3>📢 নোটিশ ব্যবস্থাপনা</h3>
+    <div class="admin-grid">
+      <input id="noticeId" type="hidden">
+      <div><label>শিরোনাম</label><input id="noticeTitle" placeholder="নোটিশের শিরোনাম"></div>
+      <div><label>সক্রিয়?</label><select id="noticeActive"><option value="true">হ্যাঁ</option><option value="false">না</option></select></div>
+      <div style="grid-column:1/-1"><label>বিস্তারিত</label><textarea id="noticeBody" rows="3" placeholder="নোটিশের বিস্তারিত"></textarea></div>
+    </div>
+    <br><button class="btn" onclick="saveNotice()">নোটিশ সেভ</button>
+    <button class="btn" style="background:#777" onclick="clearNoticeForm()">ফর্ম পরিষ্কার</button>
+    <div id="noticeAdminList" class="admin-list"></div>
+  </div>
+
+  <div class="admin-section">
+    <h3>🗓 অনুষ্ঠান ব্যবস্থাপনা</h3>
+    <div class="admin-grid">
+      <input id="eventId" type="hidden">
+      <div><label>অনুষ্ঠানের নাম</label><input id="eventTitle" placeholder="অনুষ্ঠানের নাম"></div>
+      <div><label>তারিখ</label><input id="eventDate" type="date"></div>
+      <div><label>সময়</label><input id="eventTime" placeholder="সন্ধ্যা ৬টা"></div>
+      <div><label>সক্রিয়?</label><select id="eventActive"><option value="true">হ্যাঁ</option><option value="false">না</option></select></div>
+      <div style="grid-column:1/-1"><label>বিবরণ</label><textarea id="eventDescription" rows="3"></textarea></div>
+    </div>
+    <br><button class="btn" onclick="saveEvent()">অনুষ্ঠান সেভ</button>
+    <button class="btn" style="background:#777" onclick="clearEventForm()">ফর্ম পরিষ্কার</button>
+    <div id="eventAdminList" class="admin-list"></div>
+  </div>
+
+  <div class="admin-section">
+    <h3>🖼 ছবির গ্যালারি / Storage</h3>
+    <p>বছর নির্বাচন করে ছবি আপলোড করুন। ছবিগুলো Supabase Storage ও Database-এ সেভ হবে।</p>
+    <div class="admin-grid">
+      <div><label>বছর</label><input id="galleryYear" type="number" value="2026"></div>
+      <div><label>ছবি নির্বাচন</label><input id="galleryFiles" type="file" accept="image/*" multiple></div>
+    </div>
+    <br><button class="btn" onclick="uploadGalleryFiles()">ছবি আপলোড</button>
+    <div id="galleryAdminList" class="admin-list"></div>
+  </div>
+
+  <div class="admin-section">
+    <h3>👥 কমিটি সদস্য</h3>
+    <div class="admin-grid">
+      <input id="memberId" type="hidden">
+      <div><label>নাম</label><input id="memberName" placeholder="সদস্যের নাম"></div>
+      <div><label>পদ</label><input id="memberRole" placeholder="সভাপতি / সম্পাদক"></div>
+      <div><label>ছবির URL (ঐচ্ছিক)</label><input id="memberPhoto" placeholder="ছবির URL"></div>
+      <div><label>আসল সদস্যের ছবি (সর্বোচ্চ ৫০ KB)</label><input id="memberPhotoFile" type="file" accept="image/*"></div>
+    </div>
+    <br><button class="btn" onclick="saveMember()">সদস্য সেভ</button>
+    <button class="btn" style="background:#777" onclick="clearMemberForm()">ফর্ম পরিষ্কার</button>
+    <div id="memberAdminList" class="admin-list"></div>
+  </div>
+
+  <button class="btn" onclick="testSupabaseConnection()">সংযোগ পরীক্ষা</button>
+  <button class="btn" onclick="logoutAdmin()">লগআউট</button>
+</section>
+
+<footer class="footer" id="contact"><div class="container footer-grid">
+  <div><h3>উত্তর নীলাচল সর্বজনীন দুর্গোৎসব কমিটি</h3><p>North Nilachal, Birati, Kolkata - 134</p><p>Email: uttarnilachal.sarbojonin@gmail.com</p><div class="social"><span>f</span><span>▶</span><span>☘</span></div></div>
+  <div><h3>গুরুত্বপূর্ণ লিংক</h3><p><a href="#about">আমাদের কথা</a></p><p><a href="#events">অনুষ্ঠানসূচি</a></p><p><a href="#gallery" onclick="revealGallery()">ছবির গ্যালারি</a></p></div>
+  <div><h3>যোগাযোগ</h3><p>📍 North Nilachal, Birati</p><p>📧 Email support</p><p>🙏 শারদীয়ার আনন্দে একসাথে</p></div>
+</div><div class="container" style="text-align:center;border-top:1px solid #ffffff33;margin-top:20px;padding-top:12px">© ২০২৬ উত্তর নীলাচল সর্বজনীন দুর্গোৎসব কমিটি | সর্বস্বত্ব সংরক্ষিত</div></footer>
+
+<div class="modal" id="adminModal"><div class="modal-box">
+  <h2 style="color:#8d101c">🔒 অ্যাডমিন লগইন</h2>
+  <p>Supabase Authentication-এর ইমেইল ও পাসওয়ার্ড ব্যবহার করুন।</p>
+  <input id="adminEmail" type="email" placeholder="Admin Email">
+  <input id="adminAuthPassword" type="password" placeholder="Password">
+  <p id="loginMessage" style="color:#b51222"></p>
+  <button class="btn" onclick="loginAdmin()">লগইন</button>
+  <button class="btn" style="background:#777" onclick="closeAdmin()">বন্ধ করুন</button>
+</div></div>
+
+
+<!-- Supabase connection -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://bhcjfwfrbaedaypzsykk.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJoY2pmd2ZyYmFlZGF5cHpzeWtrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAwODE2NDYsImV4cCI6MjEwNTY1NzY0Nn0.maSZ1naUTQeAWZAOfGFS69WF4fpLJft8A-zczI8P1po";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+async function testSupabaseConnection() {
+  const status = document.getElementById("supabaseStatus");
+  if (!status) return;
+  status.textContent = "Supabase সংযোগ পরীক্ষা হচ্ছে...";
+  try {
+    const { error } = await supabaseClient
+      .from("site_settings")
+      .select("site_key")
+      .limit(1);
+    if (error) throw error;
+    status.textContent = "✅ Supabase সংযোগ সফল";
+    status.style.color = "#087443";
+  } catch (error) {
+    console.error("Supabase connection error:", error);
+    status.textContent = "❌ সংযোগ বা RLS সেটিংস পরীক্ষা করুন";
+    status.style.color = "#b51222";
+  }
+}
+
+async function loadSupabasePublicData() {
+  try {
+    const [noticesResult, eventsResult, foldersResult, membersResult] = await Promise.all([
+      supabaseClient.from("site_notices").select("*").eq("is_active", true).order("sort_order"),
+      supabaseClient.from("site_events").select("*").eq("is_active", true).order("sort_order"),
+      supabaseClient.from("gallery_folders").select("*").order("year", { ascending: false }),
+      supabaseClient.from("committee_members").select("*").order("created_at", { ascending: true })
+    ]);
+    if (noticesResult.error) console.warn("Notices:", noticesResult.error.message);
+    if (eventsResult.error) console.warn("Events:", eventsResult.error.message);
+    if (foldersResult.error) console.warn("Gallery folders:", foldersResult.error.message);
+    console.log("Supabase public data loaded", {
+      notices: noticesResult.data || [],
+      events: eventsResult.data || [],
+      galleryFolders: foldersResult.data || [],
+      members: membersResult.data || []
+    });
+    if(!membersResult.error && Array.isArray(membersResult.data) && membersResult.data.length){
+      const publicGrid=document.getElementById("publicMemberGrid");
+      if(publicGrid)publicGrid.innerHTML=membersResult.data.map(memberCardHtml).join("");
+    }
+  } catch (error) {
+    console.error("Public data load error:", error);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  testSupabaseConnection();
+  loadSupabasePublicData();
+  // Website খোলার সঙ্গে সঙ্গে অনুষ্ঠানসূচি ও গ্যালারি লোড হবে
+  loadEvents();
+  loadPublicGallery();
+  loadQrCode();
+  if(location.hash === "#gallery") revealGallery();
+});
+
+window.addEventListener("hashchange", () => {
+  if(location.hash === "#gallery") revealGallery();
+});
+
+// Every public "ছবির গ্যালারি দেখুন" link/button must open the hidden gallery.
+document.addEventListener("click", (event) => {
+  const target = event.target.closest && event.target.closest("a,button");
+  if(!target) return;
+  const label=(target.textContent||"").trim();
+  const href=target.getAttribute("href")||"";
+  if(label.includes("ছবির গ্যালারি দেখুন") || href==="#gallery"){
+    if(!target.closest("#publicGalleryGrid")){
+      event.preventDefault();
+      revealGallery();
+      history.replaceState(null,"","#gallery");
+    }
+  }
+});
+</script>
+
+<script>
+let currentAdminUser = null;
+const STORAGE_BUCKET = "durga-utsav-assets";
+
+async function isAdminUser(userId){
+  const {data,error}=await supabaseClient.from("admin_users").select("user_id").eq("user_id",userId).maybeSingle();
+  if(error){console.error(error);return false}
+  return !!data;
+}
+function showStatus(msg,ok=false){
+  const el=document.getElementById("supabaseStatus");
+  if(el){el.textContent=msg;el.style.color=ok?"#087443":"#b51222"}
+}
+
+
+
+function navigateToSection(hash){
+  const cleanHash = String(hash || "").split("?")[0];
+  if(!cleanHash || cleanHash === "#") return false;
+  const target = document.querySelector(cleanHash);
+  if(!target) return false;
+  target.scrollIntoView({behavior:"smooth", block:"start"});
+  try{ history.replaceState(null, "", cleanHash); }catch(e){ location.hash = cleanHash; }
+  document.querySelectorAll("nav a[href^='#']").forEach(a=>{
+    a.classList.toggle("active", a.getAttribute("href") === cleanHash);
+  });
+  return true;
+}
+
+function installNavigationFix(){
+  document.addEventListener("click", function(event){
+    const link = event.target.closest("a[href^='#']");
+    if(!link) return;
+    const hash = link.getAttribute("href");
+    if(!hash || hash === "#") return;
+    if(hash === "#admin"){
+      event.preventDefault();
+      handleAdminNavClick();
+      return;
+    }
+    if(document.querySelector(hash)){
+      event.preventDefault();
+      navigateToSection(hash);
+    }
+  }, true);
+
+  document.querySelectorAll("button[onclick*=\"location.hash=\"]").forEach(button=>{
+    const match = button.getAttribute("onclick").match(/location\.hash\s*=\s*['"]([^'"]+)['"]/);
+    if(!match) return;
+    button.removeAttribute("onclick");
+    button.addEventListener("click", ()=>navigateToSection("#"+match[1]));
+  });
+
+  if(location.hash && document.querySelector(location.hash)){
+    setTimeout(()=>navigateToSection(location.hash), 50);
+  }
+}
+document.addEventListener("DOMContentLoaded", installNavigationFix);
+
+
+async function saveQrCode(){
+  if(!await requireAdmin())return;
+  try{
+    const file=document.getElementById("qrCodeFile")?.files?.[0];
+    const manualUrl=document.getElementById("qrCodeUrl")?.value.trim()||"";
+    let qrUrl=manualUrl;
+    if(file){
+      const compressed=await compressImageTo50KB(file);
+      const path=`settings/qr-${crypto.randomUUID()}-${compressed.fileName.replace(/[^a-zA-Z0-9._-]/g,"_")}`;
+      const upload=await supabaseClient.storage.from(STORAGE_BUCKET).upload(path,compressed.blob,{upsert:false,contentType:compressed.contentType,cacheControl:"31536000"});
+      if(upload.error)throw upload.error;
+      qrUrl=supabaseClient.storage.from(STORAGE_BUCKET).getPublicUrl(path).data.publicUrl;
+    }
+    if(!qrUrl)throw new Error("QR Code ছবি বা URL দিন।");
+    const result=await supabaseClient.from("site_settings").upsert({site_key:"qr_code",site_value:{value:qrUrl}},{onConflict:"site_key"});
+    if(result.error)throw result.error;
+    renderQrCode(qrUrl);
+    alert("✅ QR Code সেভ হয়েছে।");
+  }catch(e){alert("QR Code সেভ হয়নি: "+(e.message||e));}
+}
+function renderQrCode(url){
+  const section=document.getElementById("publicQrSection"),img=document.getElementById("publicQrCode");
+  if(!section||!img||!url)return;
+  img.src=url;
+  img.style.display="block";
+  const placeholder=document.getElementById("qrPlaceholder");
+  if(placeholder) placeholder.style.display="none";
+  const help=document.getElementById("qrHelpText");
+  if(help) help.textContent="স্ক্যান করে অনুদান পাঠাতে পারেন।";
+  section.style.display="block";
+}
+async function loadQrCode(){
+  const {data,error}=await supabaseClient.from("site_settings").select("site_value").eq("site_key","qr_code").maybeSingle();
+  if(!error&&data?.site_value){
+    const value=typeof data.site_value==="string"?data.site_value:data.site_value.value;
+    if(value){const input=document.getElementById("qrCodeUrl");if(input)input.value=value;renderQrCode(value);}
+  }
+}
+
+function updateAdminNav(){
+  const link = document.getElementById("adminNavLink");
+  if(!link) return;
+  if(currentAdminUser){
+    link.textContent = "🚪 লগআউট";
+    link.setAttribute("aria-label","অ্যাডমিন লগআউট");
+  }else{
+    link.textContent = "🔒 অ্যাডমিন লগইন";
+    link.setAttribute("aria-label","অ্যাডমিন লগইন");
+  }
+}
+document.addEventListener("DOMContentLoaded", updateAdminNav);
+async function handleAdminNavClick(){
+  if(currentAdminUser){
+    await logoutAdmin();
+  }else{
+    openAdmin();
+  }
+}
+
+function openAdmin(){
+  const modal = document.getElementById("adminModal");
+  if(modal){
+    modal.classList.add("show");
+    modal.style.display = "flex";
+  }
+  const msg = document.getElementById("loginMessage");
+  if(msg) msg.textContent = "";
+}
+function closeAdmin(){
+  const modal = document.getElementById("adminModal");
+  if(modal){
+    modal.classList.remove("show");
+    modal.style.display = "none";
+  }
+}
+
+async function loginAdmin(){
+  const email=document.getElementById("adminEmail").value.trim();
+  const password=document.getElementById("adminAuthPassword").value;
+  const message=document.getElementById("loginMessage");
+  message.textContent="লগইন হচ্ছে...";
+  if(!email || !password){
+    message.textContent="ইমেইল এবং পাসওয়ার্ড দুটোই লিখুন।";
+    return;
+  }
+  const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});
+  if(error){
+    console.error("Admin sign-in error:", error);
+    const msg=(error.message||"").toLowerCase();
+    if(msg.includes("email not confirmed")){
+      message.textContent="ইমেইল Confirm করা হয়নি। Supabase Authentication → Users থেকে Confirm করুন।";
+    }else if(msg.includes("invalid login credentials")){
+      message.textContent="ইমেইল বা পাসওয়ার্ড ভুল। Supabase Authentication → Users-এ অ্যাকাউন্ট আছে কি না দেখুন।";
+    }else{
+      message.textContent="লগইন ব্যর্থ: "+error.message;
+    }
+    return;
+  }
+  if(!data.user){
+    message.textContent="User পাওয়া যায়নি।";
+    return;
+  }
+  if(!(await isAdminUser(data.user.id))){
+    await supabaseClient.auth.signOut();
+    message.textContent="লগইন হয়েছে, কিন্তু এই User admin নয়। নিচের SQL-এ User ID যোগ করুন।";
+    return;
+  }
+  currentAdminUser=data.user;
+  updateAdminNav();
+  document.getElementById("adminPanel").classList.add("show");
+  closeAdmin(); showStatus("✅ Admin লগইন সফল",true);
+  await Promise.all([loadAllSettings(),loadNotices(),loadEvents(),loadGallery(),loadMembers()]);
+}
+async function logoutAdmin(){
+  await supabaseClient.auth.signOut();
+  currentAdminUser=null;
+  updateAdminNav();
+  document.getElementById("adminPanel").classList.remove("show");
+  showStatus("আপনি লগআউট করেছেন।",true);
+}
+async function requireAdmin(){if(!currentAdminUser){alert("আগে Admin Login করুন।");return false}return true}
+
+async function testSupabaseConnection(){
+  try{const {error}=await supabaseClient.from("site_settings").select("site_key").limit(1);if(error)throw error;showStatus("✅ Supabase সংযোগ সফল",true)}
+  catch(e){showStatus("❌ "+e.message);console.error(e)}
+}
+async function upsertSetting(site_key,value){
+  const {error}=await supabaseClient.from("site_settings").upsert({site_key,site_value:{value}}, {onConflict:"site_key"});
+  if(error)throw error;
+}
+async function saveAllSettings(){
+  if(!await requireAdmin())return;
+  try{
+    await Promise.all([
+      upsertSetting("site_title",document.getElementById("settingSiteTitle").value.trim()),
+      upsertSetting("about_text",document.getElementById("settingAbout").value.trim()),
+      upsertSetting("email",document.getElementById("settingEmail").value.trim()),
+      upsertSetting("address",document.getElementById("settingAddress").value.trim())
+    ]);
+    applyAboutText(document.getElementById("settingAbout").value);
+    alert("✅ সেটিংস সেভ হয়েছে।");
+  }catch(e){alert("সেভ হয়নি: "+e.message)}
+}
+function applyAboutText(value){
+  const text = String(value || "").trim();
+  const target = document.getElementById("publicAboutText");
+  if(target && text){
+    target.textContent = text;
+    target.classList.remove("expanded");
+  }
+  const btn = document.getElementById("aboutReadMoreBtn");
+  if(btn) btn.textContent = "আরও পড়ুন";
+}
+function toggleAboutText(){
+  const target = document.getElementById("publicAboutText");
+  const btn = document.getElementById("aboutReadMoreBtn");
+  if(!target || !btn) return;
+  const expanded = target.classList.toggle("expanded");
+  btn.textContent = expanded ? "সংক্ষেপে দেখুন" : "আরও পড়ুন";
+}
+
+async function loadAllSettings(){
+  const {data,error}=await supabaseClient.from("site_settings").select("site_key,site_value");
+  if(error){console.warn(error);return}
+  (data||[]).forEach(x=>{
+    const v=x.site_value?.value||"";
+    if(x.site_key==="site_title")document.getElementById("settingSiteTitle").value=v;
+    if(x.site_key==="about_text"){
+      document.getElementById("settingAbout").value=v;
+      applyAboutText(v);
+    }
+    if(x.site_key==="email")document.getElementById("settingEmail").value=v;
+    if(x.site_key==="address")document.getElementById("settingAddress").value=v;
+  });
+}
+
+function clearNoticeForm(){["noticeId","noticeTitle","noticeBody"].forEach(id=>document.getElementById(id).value="");document.getElementById("noticeActive").value="true"}
+async function saveNotice(){
+  if(!await requireAdmin())return;
+  const id=document.getElementById("noticeId").value;
+  const payload={title:document.getElementById("noticeTitle").value.trim(),body:document.getElementById("noticeBody").value.trim(),is_active:document.getElementById("noticeActive").value==="true",sort_order:0};
+  if(!payload.title||!payload.body)return alert("শিরোনাম ও বিস্তারিত লিখুন।");
+  const result=id?await supabaseClient.from("site_notices").update(payload).eq("id",id):await supabaseClient.from("site_notices").insert(payload);
+  if(result.error)return alert("নোটিশ সেভ হয়নি: "+result.error.message);
+  clearNoticeForm();await loadNotices();alert("✅ নোটিশ সেভ হয়েছে।");
+}
+async function loadNotices(){
+  const {data,error}=await supabaseClient.from("site_notices").select("*").order("created_at",{ascending:false});
+  if(error){console.warn(error);return}
+  document.getElementById("noticeAdminList").innerHTML=(data||[]).map(x=>`<div class="admin-row"><div><b>${escapeHtml(x.title)}</b><small>${escapeHtml(x.body)}</small></div><div><button class="btn" onclick="editNotice('${x.id}')">এডিট</button><button class="btn" style="background:#a00" onclick="deleteNotice('${x.id}')">ডিলিট</button></div></div>`).join("")||"<small>কোনো নোটিশ নেই</small>";
+  window.noticeCache=data||[];
+}
+function editNotice(id){const x=(window.noticeCache||[]).find(a=>a.id===id);if(!x)return;noticeId.value=x.id;noticeTitle.value=x.title;noticeBody.value=x.body;noticeActive.value=String(x.is_active)}
+async function deleteNotice(id){if(!confirm("নোটিশ ডিলিট করবেন?"))return;const {error}=await supabaseClient.from("site_notices").delete().eq("id",id);if(error)return alert(error.message);await loadNotices()}
+
+function clearEventForm(){["eventId","eventTitle","eventDate","eventTime","eventDescription"].forEach(id=>document.getElementById(id).value="");document.getElementById("eventActive").value="true"}
+async function saveEvent(){
+  if(!await requireAdmin())return;
+  const id=document.getElementById("eventId").value;
+  const payload={title:document.getElementById("eventTitle").value.trim(),event_date:document.getElementById("eventDate").value||null,event_time:document.getElementById("eventTime").value.trim(),description:document.getElementById("eventDescription").value.trim(),is_active:document.getElementById("eventActive").value==="true",sort_order:0};
+  if(!payload.title)return alert("অনুষ্ঠানের নাম লিখুন।");
+  const result=id?await supabaseClient.from("site_events").update(payload).eq("id",id):await supabaseClient.from("site_events").insert(payload);
+  if(result.error)return alert("অনুষ্ঠান সেভ হয়নি: "+result.error.message);
+  clearEventForm();await loadEvents();alert("✅ অনুষ্ঠান সেভ হয়েছে।");
+}
+function formatBnDate(dateText){
+  if(!dateText) return "";
+  const months=["জানু","ফেব্রু","মার্চ","এপ্রিল","মে","জুন","জুলাই","আগস্ট","সেপ্টে","অক্টো","নভে","ডিসে"];
+  const parts=String(dateText).split("-");
+  if(parts.length!==3) return escapeHtml(dateText);
+  const day=String(Number(parts[2])).replace(/0/g,"০").replace(/1/g,"১").replace(/2/g,"২").replace(/3/g,"৩").replace(/4/g,"৪").replace(/5/g,"৫").replace(/6/g,"৬").replace(/7/g,"৭").replace(/8/g,"৮").replace(/9/g,"৯");
+  return `${day} ${months[Number(parts[1])-1]||""}`;
+}
+function renderPublicEvents(events){
+  const box=document.getElementById("publicEventsList");
+  if(!box)return;
+  box.innerHTML=(events||[]).map(x=>{
+    const date=formatBnDate(x.event_date);
+    const dateParts=date.split(" ");
+    const day=dateParts.shift()||"";
+    const month=dateParts.join(" ")||"";
+    return `<div class="event-item"><div class="date-box"><b>${escapeHtml(day||"📅")}</b>${escapeHtml(month)}</div><div><b>${escapeHtml(x.title||"")}</b><br><small>${escapeHtml(x.event_time||"")} ${x.description?"— "+escapeHtml(x.description):""}</small></div></div>`;
+  }).join("") || "<p>শীঘ্রই অনুষ্ঠানসূচি প্রকাশ করা হবে।</p>";
+}
+function sortEventsByDate(events){
+  return [...(events||[])].sort((a,b)=>{
+    const ad=a.event_date||"9999-12-31";
+    const bd=b.event_date||"9999-12-31";
+    if(ad!==bd) return ad.localeCompare(bd);
+    const at=a.event_time||"";
+    const bt=b.event_time||"";
+    if(at!==bt) return at.localeCompare(bt);
+    return (Number(a.sort_order)||0)-(Number(b.sort_order)||0);
+  });
+}
+const defaultPujaEvents = [
+  {id:"default-mahalaya",title:"মহালয়া",event_date:"2026-09-28",event_time:"ভোর ৮.০০",description:"বিশেষ সম্প্রচার",is_active:true,sort_order:1},
+  {id:"default-shasthi",title:"ষষ্ঠী পূজা",event_date:"2026-10-09",event_time:"সন্ধ্যা ৬.০০",description:"বোধন ও আমন্ত্রণ",is_active:true,sort_order:2},
+  {id:"default-saptami",title:"সপ্তমী পূজা",event_date:"2026-10-10",event_time:"সকাল ৮.০০",description:"নবপত্রিকা স্নান",is_active:true,sort_order:3}
+];
+
+async function loadEvents(){
+  const {data,error}=await supabaseClient.from("site_events").select("*").eq("is_active",true);
+  const sourceEvents = (!error && data && data.length) ? data : defaultPujaEvents;
+  if(error) console.warn("অনুষ্ঠানসূচি Database থেকে আসেনি; ডিফল্ট অনুষ্ঠান দেখানো হচ্ছে:", error.message);
+
+  const today=new Date().toISOString().slice(0,10);
+  const upcoming=sortEventsByDate(sourceEvents.filter(x=>!x.event_date || x.event_date>=today));
+  window.eventCache=upcoming;
+
+  const adminList=document.getElementById("eventAdminList");
+  if(adminList){
+    const {data:allData}=await supabaseClient.from("site_events").select("*");
+    const adminEvents = (allData && allData.length) ? allData : defaultPujaEvents;
+    window.eventCache=sortEventsByDate(adminEvents);
+    adminList.innerHTML=window.eventCache.map(x=>`<div class="admin-row"><div><b>${escapeHtml(x.title)}</b><small>${escapeHtml(x.event_date||"তারিখ নেই")} ${escapeHtml(x.event_time||"")}<br>${escapeHtml(x.description||"")}<br>সক্রিয়: ${x.is_active?"হ্যাঁ":"না"}</small></div><div>${String(x.id).startsWith("default-")?"<small>SQL চালিয়ে Database-এ যোগ করুন</small>":`<button class="btn" onclick="editEvent('${x.id}')">এডিট</button><button class="btn" style="background:#a00" onclick="deleteEvent('${x.id}')">ডিলিট</button>`}</div></div>`).join("")||"<small>কোনো অনুষ্ঠান নেই</small>";
+  }
+  renderPublicEvents(upcoming.length ? upcoming : defaultPujaEvents);
+}
+function editEvent(id){const x=(window.eventCache||[]).find(a=>a.id===id);if(!x)return;document.getElementById("eventId").value=x.id;document.getElementById("eventTitle").value=x.title||"";document.getElementById("eventDate").value=x.event_date||"";document.getElementById("eventTime").value=x.event_time||"";document.getElementById("eventDescription").value=x.description||"";document.getElementById("eventActive").value=String(x.is_active)}
+async function deleteEvent(id){if(!confirm("অনুষ্ঠান ডিলিট করবেন?"))return;const {error}=await supabaseClient.from("site_events").delete().eq("id",id);if(error)return alert(error.message);await loadEvents()}
+
+
+async function compressImageTo50KB(file){
+  const MAX_BYTES = 50 * 1024;
+  if(file.size <= MAX_BYTES && /^image\/(jpeg|jpg|png|webp)$/i.test(file.type)){
+    return {blob:file, fileName:file.name.replace(/\.[^.]+$/i,"")+".jpg", contentType:file.type};
+  }
+  if(!file.type.startsWith("image/")) throw new Error("শুধু ছবি আপলোড করা যাবে।");
+
+  const bitmap = await createImageBitmap(file);
+  let maxSide = 1800;
+  let width = bitmap.width, height = bitmap.height;
+  const scale = Math.min(1, maxSide / Math.max(width,height));
+  width = Math.max(1, Math.round(width * scale));
+  height = Math.max(1, Math.round(height * scale));
+
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d", {alpha:false});
+  let quality = 0.82;
+  let blob = null;
+
+  for(let attempt=0; attempt<18; attempt++){
+    canvas.width = width;
+    canvas.height = height;
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0,0,width,height);
+    ctx.drawImage(bitmap,0,0,width,height);
+
+    blob = await new Promise(resolve => canvas.toBlob(resolve,"image/jpeg",quality));
+    if(blob && blob.size <= MAX_BYTES) break;
+
+    if(quality > 0.38){
+      quality -= 0.06;
+    }else{
+      width = Math.max(240, Math.round(width * 0.82));
+      height = Math.max(240, Math.round(height * 0.82));
+      quality = 0.72;
+    }
+  }
+  bitmap.close();
+
+  if(!blob || blob.size > MAX_BYTES){
+    throw new Error("ছবিটি ৫০ KB-এর মধ্যে কমপ্রেস করা যায়নি। অন্য ছবি দিন।");
+  }
+  return {
+    blob,
+    fileName: file.name.replace(/\.[^.]+$/i,"")+".jpg",
+    contentType:"image/jpeg"
+  };
+}
+
+let publicGalleryGroups = {};
+let publicGalleryFolders = [];
+
+async function loadPublicGallery(){
+  const grid=document.getElementById("publicGalleryGrid");
+  const empty=document.getElementById("galleryEmptyText");
+  if(!grid)return;
+
+  try{
+    const [foldersResult, photosResult] = await Promise.all([
+      supabaseClient.from("gallery_folders")
+        .select("id,year,title")
+        .order("year",{ascending:false}),
+      supabaseClient.from("gallery_photos")
+        .select("id,folder_id,public_url,file_name,created_at")
+        .order("created_at",{ascending:false})
+    ]);
+
+    if(foldersResult.error) throw foldersResult.error;
+    if(photosResult.error) throw photosResult.error;
+
+    const folders=foldersResult.data||[];
+    const photos=photosResult.data||[];
+    publicGalleryFolders=folders;
+    publicGalleryGroups={};
+
+    photos.forEach(photo=>{
+      if(!publicGalleryGroups[photo.folder_id]) publicGalleryGroups[photo.folder_id]=[];
+      publicGalleryGroups[photo.folder_id].push(photo);
+    });
+
+    renderGalleryFolders();
+
+  }catch(error){
+    console.warn("Public gallery load error:",error);
+    if(empty)empty.textContent="গ্যালারি লোড করা যায়নি। Supabase Table ও RLS Policy পরীক্ষা করুন।";
+  }
+}
+
+function renderGalleryFolders(){
+  const grid=document.getElementById("publicGalleryGrid");
+  const empty=document.getElementById("galleryEmptyText");
+  if(!grid)return;
+
+  if(!publicGalleryFolders.length){
+    grid.innerHTML='<div style="grid-column:1/-1;text-align:center;color:#777;padding:20px">এখনও কোনো গ্যালারি ফোল্ডার তৈরি হয়নি।</div>';
+    if(empty)empty.textContent="অ্যাডমিন প্যানেল থেকে ছবি আপলোড করলে ফোল্ডার এখানে দেখা যাবে।";
+    return;
+  }
+
+  grid.innerHTML=publicGalleryFolders.map(folder=>{
+    const count=(publicGalleryGroups[folder.id]||[]).length;
+    const title=escapeHtml(folder.title||String(folder.year||"গ্যালারি"));
+    const year=escapeHtml(String(folder.year||""));
+    const safeId=String(folder.id).replace(/\\/g,"\\\\").replace(/'/g,"\\'");
+    return `
+      <button type="button" data-real-gallery-content="true"
+        onclick="openGalleryFolder('${safeId}')"
+        style="width:100%;min-height:150px;border:1px solid #ead9b8;border-radius:14px;background:linear-gradient(135deg,#fff8df,#ffe08a);padding:22px 12px;cursor:pointer;box-shadow:0 3px 10px #00000010;">
+        <div style="font-size:42px;margin-bottom:8px">📁</div>
+        <strong style="display:block;font-size:24px;color:#650b13">${title}</strong>
+        <small style="display:block;margin-top:8px;color:#6b4a25">${year} • ${count}টি ছবি</small>
+        <span style="display:inline-block;margin-top:12px;background:#650b13;color:#fff;padding:7px 14px;border-radius:20px;font-size:13px">ফোল্ডার খুলুন ▸</span>
+      </button>`;
+  }).join("");
+
+  if(empty)empty.textContent="ছবি দেখতে সংশ্লিষ্ট ফোল্ডারের নামে চাপ দিন।";
+}
+
+
+function revealGallery(){
+  const section=document.getElementById("gallery");
+  if(section){
+    section.style.display="block";
+    section.hidden=false;
+    section.setAttribute("data-gallery-visible","true");
+  }
+  const grid=document.getElementById("publicGalleryGrid");
+  if(grid){
+    // Remove the initial emoji placeholders before rendering real folders.
+    const hasRealContent = grid.querySelector("[data-real-gallery-content='true']");
+    if(!hasRealContent && publicGalleryFolders && publicGalleryFolders.length){
+      renderGalleryFolders();
+    } else if(!grid.children.length){
+      renderGalleryFolders();
+    }
+  }
+  // Move the user to the opened gallery section.
+  if(section){
+    setTimeout(()=>section.scrollIntoView({behavior:"smooth",block:"start"}),0);
+  }
+}
+
+function hideGallery(){
+  const section=document.getElementById("gallery");
+  if(section) section.style.display="none";
+}
+
+function showAllGalleryFolders(){
+  renderGalleryFolders();
+  const grid=document.getElementById("publicGalleryGrid");
+  if(grid) grid.scrollIntoView({behavior:"smooth",block:"start"});
+  const empty=document.getElementById("galleryEmptyText");
+  if(empty)empty.textContent="ছবি দেখতে সংশ্লিষ্ট ফোল্ডারের নামে চাপ দিন।";
+}
+
+function openGalleryFolder(folderId){
+  const grid=document.getElementById("publicGalleryGrid");
+  const empty=document.getElementById("galleryEmptyText");
+  if(!grid)return;
+
+  const photos=publicGalleryGroups[folderId]||[];
+  if(!photos.length){
+    grid.innerHTML=`
+      <div style="grid-column:1/-1;text-align:center;padding:24px;color:#777">
+        <div style="font-size:42px">📂</div>
+        <p>এই ফোল্ডারে এখনও কোনো ছবি নেই।</p>
+        <button type="button" class="btn" onclick="showAllGalleryFolders()">← ফোল্ডার তালিকায় ফিরুন</button>
+      </div>`;
+    if(empty)empty.textContent="";
+    return;
+  }
+
+  grid.innerHTML=`
+    <div style="grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px">
+      <strong style="color:#650b13">🖼 ফোল্ডারের ছবি</strong>
+      <button type="button" class="btn" onclick="showAllGalleryFolders()">← সব ফোল্ডার</button>
+    </div>
+    ${photos.map(photo=>{
+      const url=escapeHtml(photo.public_url||"");
+      const name=escapeHtml(photo.file_name||"ছবি");
+      return `
+        <div style="height:auto;min-height:150px;background:#fff;border:1px solid #ead9b8;padding:6px;border-radius:10px;overflow:hidden">
+          <img src="${url}" alt="${name}" loading="lazy"
+            style="display:block;width:100%;height:180px;object-fit:cover;border-radius:7px"
+            onerror="this.parentElement.style.display='none'">
+          <small style="display:block;text-align:center;padding:5px;color:#777">${name}</small>
+        </div>`;
+    }).join("")}
+    <div style="grid-column:1/-1;text-align:center;margin:18px 0 6px">
+      <button type="button" class="btn" onclick="showAllGalleryFolders()">← সব ফোল্ডার</button>
+    </div>`;
+
+  if(empty)empty.textContent="এই ফোল্ডারের ছবি দেখা যাচ্ছে। আবার ফোল্ডার তালিকায় যেতে ‘সব ফোল্ডার’ চাপুন।";
+}
+
+async function uploadGalleryFiles(){
+  if(!await requireAdmin())return;
+  const year=document.getElementById("galleryYear").value;
+  const files=[...(document.getElementById("galleryFiles").files||[])];
+  if(!year||!files.length)return alert("বছর ও ছবি নির্বাচন করুন।");
+  let {data:folder,error}=await supabaseClient.from("gallery_folders").upsert({year:Number(year),title:String(year)},{onConflict:"year"}).select().single();
+  if(error)return alert("ফোল্ডার তৈরি হয়নি: "+error.message);
+  for(const file of files){
+    try{
+      const compressed = await compressImageTo50KB(file);
+      const safeName=compressed.fileName.replace(/[^a-zA-Z0-9._-]/g,"_");
+      const path=`${year}/${crypto.randomUUID()}-${safeName}`;
+      const upload=await supabaseClient.storage.from(STORAGE_BUCKET).upload(
+        path, compressed.blob,
+        {upsert:false,contentType:compressed.contentType,cacheControl:"31536000"}
+      );
+      if(upload.error){alert("ছবি আপলোড হয়নি: "+upload.error.message);continue}
+      const publicUrl=supabaseClient.storage.from(STORAGE_BUCKET).getPublicUrl(path).data.publicUrl;
+      const db=await supabaseClient.from("gallery_photos").insert({
+        folder_id:folder.id,
+        file_name:compressed.fileName,
+        storage_path:path,
+        public_url:publicUrl,
+        file_size:compressed.blob.size,
+        sort_order:0
+      });
+      if(db.error)alert("ছবির তথ্য সেভ হয়নি: "+db.error.message);
+    }catch(err){
+      alert("ছবি কমপ্রেস হয়নি: "+(err?.message||err));
+    }
+  }
+  document.getElementById("galleryFiles").value="";
+  await loadGallery();
+  await loadPublicGallery();
+  alert("✅ ছবি আপলোড প্রক্রিয়া শেষ।");
+}
+async function loadGallery(){
+  const {data,error}=await supabaseClient.from("gallery_photos").select("*,gallery_folders(year)").order("created_at",{ascending:false});
+  if(error){console.warn(error);return}
+  window.galleryCache=data||[];
+  galleryAdminList.innerHTML=window.galleryCache.map(x=>`<div class="admin-row"><div><b>${escapeHtml(x.file_name)}</b><small>বছর: ${escapeHtml(String(x.gallery_folders?.year||""))}</small></div><div><button class="btn" style="background:#a00" onclick="deleteGalleryPhoto('${x.id}','${x.storage_path.replace(/'/g,"\\'")}')">ডিলিট</button></div></div>`).join("")||"<small>কোনো ছবি নেই</small>";
+}
+async function deleteGalleryPhoto(id,path){
+  if(!confirm("ছবিটি ডিলিট করবেন?"))return;
+  const rm=await supabaseClient.storage.from(STORAGE_BUCKET).remove([path]);
+  if(rm.error)return alert("Storage থেকে ডিলিট হয়নি: "+rm.error.message);
+  const db=await supabaseClient.from("gallery_photos").delete().eq("id",id);
+  if(db.error)return alert("Database থেকে ডিলিট হয়নি: "+db.error.message);
+  await loadGallery();
+}
+
+function clearMemberForm(){
+  ["memberId","memberName","memberRole","memberPhoto","memberPhotoFile"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.value="";
+  });
+}
+async function saveMember(){
+  if(!await requireAdmin())return;
+  const id=document.getElementById("memberId").value;
+  const name=document.getElementById("memberName").value.trim();
+  const role=document.getElementById("memberRole").value.trim();
+  let photoUrl=document.getElementById("memberPhoto").value.trim();
+  const photoFile=document.getElementById("memberPhotoFile")?.files?.[0];
+
+  if(!name||!role)return alert("নাম ও পদ লিখুন।");
+
+  try{
+    if(photoFile){
+      const compressed=await compressImageTo50KB(photoFile);
+      const safeName=compressed.fileName.replace(/[^a-zA-Z0-9._-]/g,"_");
+      const storagePath=`committee/${crypto.randomUUID()}-${safeName}`;
+      const upload=await supabaseClient.storage.from(STORAGE_BUCKET).upload(
+        storagePath,compressed.blob,
+        {upsert:false,contentType:compressed.contentType,cacheControl:"31536000"}
+      );
+      if(upload.error)throw upload.error;
+      photoUrl=supabaseClient.storage.from(STORAGE_BUCKET).getPublicUrl(storagePath).data.publicUrl;
+    }
+
+    const payload={name,role,photo_url:photoUrl};
+    const result=id
+      ? await supabaseClient.from("committee_members").update(payload).eq("id",id)
+      : await supabaseClient.from("committee_members").insert(payload);
+
+    if(result.error)throw result.error;
+    clearMemberForm();
+    await loadMembers();
+    alert("✅ সদস্য সেভ হয়েছে।");
+  }catch(error){
+    alert("সদস্য সেভ হয়নি: "+(error?.message||error));
+  }
+}
+function memberCardHtml(x){
+  const photo=x.photo_url
+    ? `<img src="${escapeHtml(x.photo_url)}" alt="${escapeHtml(x.name)}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`
+    : "👨";
+  return `<div class="member"><div class="avatar" style="overflow:hidden">${photo}</div><b>${escapeHtml(x.name)}</b><small>${escapeHtml(x.role||"")}</small></div>`;
+}
+async function loadMembers(){
+  const {data,error}=await supabaseClient.from("committee_members").select("*").order("created_at",{ascending:true});
+  if(error){
+    const adminList=document.getElementById("memberAdminList");
+    if(adminList)adminList.innerHTML="<small>সদস্য টেবিল বা RLS সেটিংস পরীক্ষা করুন। "+escapeHtml(error.message)+"</small>";
+    return;
+  }
+  window.memberCache=data||[];
+  const adminList=document.getElementById("memberAdminList");
+  if(adminList){
+    adminList.innerHTML=window.memberCache.map(x=>`<div class="admin-row"><div><b>${escapeHtml(x.name)}</b><small>${escapeHtml(x.role||"")}</small></div><div><button class="btn" onclick="editMember('${x.id}')">এডিট</button><button class="btn" style="background:#a00" onclick="deleteMember('${x.id}')">ডিলিট</button></div></div>`).join("")||"<small>কোনো সদস্য নেই</small>";
+  }
+  const publicGrid=document.getElementById("publicMemberGrid");
+  if(publicGrid && window.memberCache.length){
+    publicGrid.innerHTML=window.memberCache.map(memberCardHtml).join("");
+  }
+}
+function editMember(id){
+  const x=(window.memberCache||[]).find(a=>a.id===id);
+  if(!x)return;
+  document.getElementById("memberId").value=x.id;
+  document.getElementById("memberName").value=x.name||"";
+  document.getElementById("memberRole").value=x.role||"";
+  document.getElementById("memberPhoto").value=x.photo_url||"";
+  const file=document.getElementById("memberPhotoFile");
+  if(file)file.value="";
+}
+async function deleteMember(id){
+  if(!confirm("সদস্য ডিলিট করবেন?"))return;
+  const {error}=await supabaseClient.from("committee_members").delete().eq("id",id);
+  if(error)return alert(error.message);
+  await loadMembers();
+}
+
+function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+supabaseClient.auth.onAuthStateChange(async(_event,session)=>{
+  if(!session?.user)return;
+  if(await isAdminUser(session.user.id)){
+    currentAdminUser=session.user;
+    document.getElementById("adminPanel").classList.add("show");
+    await Promise.all([loadAllSettings(),loadNotices(),loadEvents(),loadGallery(),loadMembers()]);
+  }
+});
+</script>
+</body>
+</html>
