@@ -322,20 +322,31 @@ async function testSupabaseConnection() {
 
 async function loadSupabasePublicData() {
   try {
-    const [noticesResult, eventsResult, foldersResult, membersResult] = await Promise.all([
+    const [noticesResult, eventsResult, foldersResult, membersResult, settingsResult] = await Promise.all([
       supabaseClient.from("site_notices").select("*").eq("is_active", true).order("sort_order"),
       supabaseClient.from("site_events").select("*").eq("is_active", true).order("sort_order"),
       supabaseClient.from("gallery_folders").select("*").order("year", { ascending: false }),
-      supabaseClient.from("committee_members").select("*").order("created_at", { ascending: true })
+      supabaseClient.from("committee_members").select("*").order("created_at", { ascending: true }),
+      supabaseClient.from("site_settings").select("site_key,site_value")
     ]);
     if (noticesResult.error) console.warn("Notices:", noticesResult.error.message);
     if (eventsResult.error) console.warn("Events:", eventsResult.error.message);
     if (foldersResult.error) console.warn("Gallery folders:", foldersResult.error.message);
+    if (settingsResult.error) console.warn("Settings:", settingsResult.error.message);
+
+    // Public users must also see the saved “আমাদের কথা” text without admin login.
+    if (!settingsResult.error && Array.isArray(settingsResult.data)) {
+      const aboutSetting = settingsResult.data.find(x => x.site_key === "about_text");
+      const aboutValue = aboutSetting?.site_value?.value || "";
+      if (aboutValue) applyAboutText(aboutValue);
+    }
+
     console.log("Supabase public data loaded", {
       notices: noticesResult.data || [],
       events: eventsResult.data || [],
       galleryFolders: foldersResult.data || [],
-      members: membersResult.data || []
+      members: membersResult.data || [],
+      settings: settingsResult.data || []
     });
     if(!membersResult.error && Array.isArray(membersResult.data) && membersResult.data.length){
       const publicGrid=document.getElementById("publicMemberGrid");
