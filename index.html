@@ -190,6 +190,7 @@ nav { position: sticky; top: 0; z-index: 1000; }
           <p>যাঁরা নবমীর ভুরিভোজে অংশগ্রহণ করবেন, তাঁরা নিজের নাম ও পরিবারের সদস্য সংখ্যা লিখে নাম নথিভুক্ত করুন।</p>
           <form id="feastSignupForm" onsubmit="submitFeastSignup(event)" style="display:grid;gap:10px;max-width:520px">
             <label>আপনার নাম</label><input id="feastName" required maxlength="120" placeholder="নাম লিখুন">
+            <label>মোবাইল নম্বর <span style="color:#a00">*</span></label><input id="feastPhone" type="tel" required inputmode="numeric" pattern="[0-9+()\- ]{10,20}" maxlength="20" placeholder="মোবাইল নম্বর লিখুন">
             <label>একই পরিবারের মোট কতজন?</label><input id="feastFamilyCount" type="number" min="1" max="30" required value="1">
             <button class="btn" type="submit">নাম নথিভুক্ত করুন</button>
           </form>
@@ -1140,7 +1141,7 @@ function renderFeastRows(rows){
   const adminList=document.getElementById("feastAdminList");
   const totalFamilies=rows.length; const totalPeople=rows.reduce((a,x)=>a+Number(x.family_count||0),0);
   const summary=`<div style="margin:10px 0 14px;padding:12px;border:1px solid #e5c3c3;border-radius:10px;background:#fff7f7;color:#7d0f18;font-weight:800">মোট পরিবার: ${bnNumber(totalFamilies)} | মোট ব্যক্তি: ${bnNumber(totalPeople)} জন</div>`;
-  if(adminList)adminList.innerHTML=summary+(rows.map(x=>`<div class="admin-row"><div><b>${escapeHtml(x.name)}</b><small>পরিবারের সদস্য: ${bnNumber(x.family_count)}</small></div><button class="btn" style="background:#a00" onclick="deleteFeastSignup('${x.id}')">ডিলিট</button></div>`).join("") || '<small>কোনো নাম নেই</small>');
+  if(adminList)adminList.innerHTML=summary+(rows.map(x=>`<div class="admin-row"><div><b>${escapeHtml(x.name)}</b><small>মোবাইল: ${escapeHtml(x.phone||"—")}<br>পরিবারের সদস্য: ${bnNumber(x.family_count)}</small></div><button class="btn" style="background:#a00" onclick="deleteFeastSignup('${x.id}')">ডিলিট</button></div>`).join("") || '<small>কোনো নাম নেই</small>');
 }
 async function loadFeastData(){
   const settingsResult=await supabaseClient.from("feast_settings").select("*").eq("id",1).maybeSingle();
@@ -1158,9 +1159,9 @@ async function submitFeastSignup(event){
   const settingsResult=await supabaseClient.from("feast_settings").select("*").eq("id",1).maybeSingle();
   const settings=settingsResult.data||{is_active:true,close_date:FEAST_CLOSE_DEFAULT};
   if(!feastIsOpen(settings)){alert("নাম লেখার সময়সীমা শেষ হয়েছে।");await loadFeastData();return;}
-  const name=document.getElementById("feastName").value.trim(); const family_count=Number(document.getElementById("feastFamilyCount").value);
-  if(!name||family_count<1)return;
-  const r=await supabaseClient.from("feast_signups").insert({name,family_count});
+  const name=document.getElementById("feastName").value.trim(); const phone=document.getElementById("feastPhone").value.trim(); const family_count=Number(document.getElementById("feastFamilyCount").value);
+  if(!name||!phone||family_count<1){alert("নাম, মোবাইল নম্বর ও পরিবারের সদস্য সংখ্যা পূরণ করুন।");return;}
+  const r=await supabaseClient.from("feast_signups").insert({name,phone,family_count});
   const msg=document.getElementById("feastSignupMessage");
   if(r.error){if(msg)msg.textContent="সেভ হয়নি: "+r.error.message;return;}
   document.getElementById("feastSignupForm").reset();document.getElementById("feastFamilyCount").value=1;
