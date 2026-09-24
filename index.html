@@ -1181,6 +1181,7 @@ function feastIsOpen(settings){
   return settings?.is_active !== false && today < close;
 }
 function bnNumber(n){return String(n).replace(/[0-9]/g,d=>"০১২৩৪৫৬৭৮৯"[d]);}
+
 function printFeastReport(){
   if(!currentAdminUser){ alert("আগে Admin Login করুন।"); return; }
 
@@ -1286,43 +1287,79 @@ async function loadFeastData(){
 }
 async function submitFeastSignup(event){
   event.preventDefault();
-  const settingsResult=await supabaseClient.from("feast_settings").select("*").eq("id",1).maybeSingle();
-  const settings=settingsResult.data||{is_active:true,close_date:FEAST_CLOSE_DEFAULT};
-  if(!feastIsOpen(settings)){alert("নাম লেখার সময়সীমা শেষ হয়েছে।");await loadFeastData();return;}
-  const name=document.getElementById("feastName").value.trim();
-  const phone=document.getElementById("feastPhone").value.trim();
-  const family_count=Number(document.getElementById("feastFamilyCount").value);
-  if(!name||!phone||family_count<1){alert("নাম, মোবাইল নম্বর ও পরিবারের সদস্য সংখ্যা পূরণ করুন।");return;}
-  if(!/^[0-9+()\- ]{10,20}$/.test(phone)){alert("সঠিক মোবাইল নম্বর লিখুন।");return;}
-  // ধারাবাহিক কুপন নম্বর: UNSDC001, UNSDC002, UNSDC003 ...
-  // আগের UNSDC নম্বরগুলোর মধ্যে সর্বোচ্চ নম্বর বের করে পরের নম্বর তৈরি করা হচ্ছে।
-  const existingCoupons = await supabaseClient
-    .from("feast_signups")
-    .select("coupon_no");
 
-  if (existingCoupons.error) {
-    if (msg) msg.textContent = "কুপন নম্বর তৈরি করা যায়নি: " + existingCoupons.error.message;
+  const settingsResult=await supabaseClient
+    .from("feast_settings")
+    .select("*")
+    .eq("id",1)
+    .maybeSingle();
+
+  const settings=settingsResult.data||{is_active:true,close_date:FEAST_CLOSE_DEFAULT};
+  if(!feastIsOpen(settings)){
+    alert("নাম লেখার সময়সীমা শেষ হয়েছে।");
+    await loadFeastData();
     return;
   }
 
-  let maxCouponNumber = 0;
-  (existingCoupons.data || []).forEach(row => {
-    const match = String(row.coupon_no || "").trim().match(/^UNSDC(\\d+)$/i);
-    if (match) {
-      maxCouponNumber = Math.max(maxCouponNumber, Number(match[1]));
-    }
-  });
-
-  const coupon_no = "UNSDC" + String(maxCouponNumber + 1).padStart(3, "0");
-  const r=await supabaseClient.from("feast_signups").insert({name,phone,family_count,coupon_no});
+  const name=document.getElementById("feastName").value.trim();
+  const phone=document.getElementById("feastPhone").value.trim();
+  const family_count=Number(document.getElementById("feastFamilyCount").value);
   const msg=document.getElementById("feastSignupMessage");
-  if(r.error){if(msg)msg.textContent="সেভ হয়নি: "+r.error.message;return;}
+
+  if(!name||!phone||family_count<1){
+    alert("নাম, মোবাইল নম্বর ও পরিবারের সদস্য সংখ্যা পূরণ করুন।");
+    return;
+  }
+
+  if(!/^[0-9+()\- ]{10,20}$/.test(phone)){
+    alert("সঠিক মোবাইল নম্বর লিখুন।");
+    return;
+  }
+
+  // Supabase Database Function থেকে নিরাপদে পরবর্তী কুপন নম্বর নেওয়া হচ্ছে।
+  // ফরম্যাট: UNSDC001, UNSDC002, ... UNSDC999
+  const serialResult=await supabaseClient.rpc("get_next_feast_coupon");
+
+  if(serialResult.error || !serialResult.data){
+    if(msg){
+      msg.textContent="কুপন নম্বর তৈরি করা যায়নি: "+
+        (serialResult.error?.message || "Database function-এর সমস্যা হয়েছে।");
+    }
+    return;
+  }
+
+  const coupon_no=String(serialResult.data);
+
+  const r=await supabaseClient
+    .from("feast_signups")
+    .insert({name,phone,family_count,coupon_no});
+
+  if(r.error){
+    if(msg)msg.textContent="সেভ হয়নি: "+r.error.message;
+    return;
+  }
+
   const coupon=document.getElementById("feastCoupon");
   if(coupon){
-    coupon.innerHTML=`<div class="coupon-card" id="printableFeastCoupon"><div style="text-align:center;font-size:34px">🍽️ 🌺 🙏</div><h2>নবমীর ভুরিভোজ ২০২৬</h2><h3>উত্তর নীলাচল সর্বজনীন দুর্গোৎসব কমিটি</h3><p style="text-align:center;margin:5px 0">অংশগ্রহণের কুপন</p><div class="coupon-line"><b>কুপন নম্বর</b><strong>${escapeHtml(coupon_no)}</strong></div><div class="coupon-line"><b>নাম</b><span>${escapeHtml(name)}</span></div><div class="coupon-line"><b>মোবাইল নম্বর</b><span>${escapeHtml(phone)}</span></div><div class="coupon-line"><b>পরিবারের সদস্য</b><strong>${bnNumber(family_count)} জন</strong></div><div class="coupon-note">এই কুপনটি স্ক্রিনশট নিয়ে রাখুন অথবা প্রিন্ট করুন।<br>মা দুর্গার আশীর্বাদে সকলের মঙ্গল হোক। 🙏</div></div><div class="coupon-actions"><button class="btn" type="button" onclick="printFeastCoupon()">🖨️ কুপন প্রিন্ট করুন</button></div>`;
+    coupon.innerHTML=`<div class="coupon-card" id="printableFeastCoupon">
+      <div style="text-align:center;font-size:34px">🍽️ 🌺 🙏</div>
+      <h2>নবমীর ভুরিভোজ ২০২৬</h2>
+      <h3>উত্তর নীলাচল সর্বজনীন দুর্গোৎসব কমিটি</h3>
+      <p style="text-align:center;margin:5px 0">অংশগ্রহণের কুপন</p>
+      <div class="coupon-line"><b>কুপন নম্বর</b><strong>${escapeHtml(coupon_no)}</strong></div>
+      <div class="coupon-line"><b>নাম</b><span>${escapeHtml(name)}</span></div>
+      <div class="coupon-line"><b>মোবাইল নম্বর</b><span>${escapeHtml(phone)}</span></div>
+      <div class="coupon-line"><b>পরিবারের সদস্য</b><strong>${bnNumber(family_count)} জন</strong></div>
+      <div class="coupon-note">এই কুপনটি স্ক্রিনশট নিয়ে রাখুন অথবা প্রিন্ট করুন।<br>মা দুর্গার আশীর্বাদে সকলের মঙ্গল হোক। 🙏</div>
+    </div>
+    <div class="coupon-actions">
+      <button class="btn" type="button" onclick="printFeastCoupon()">🖨️ কুপন প্রিন্ট করুন</button>
+    </div>`;
+
     coupon.style.display="block";
     coupon.scrollIntoView({behavior:"smooth",block:"center"});
   }
+
   document.getElementById("feastSignupForm").reset();
   document.getElementById("feastFamilyCount").value=1;
   if(msg)msg.textContent="✅ আপনার নাম সফলভাবে নথিভুক্ত হয়েছে। নিচে আপনার কুপন দেওয়া হয়েছে।";
