@@ -337,6 +337,7 @@ nav { position: sticky; top: 0; z-index: 1000; }
     </div>
     <br><button class="btn" onclick="saveFeastSettings()">সেটিংস সেভ</button>
     <button class="btn" style="background:#777" onclick="loadFeastData()">তালিকা রিফ্রেশ</button>
+    <button class="btn" style="background:#087f5b" onclick="printFeastReport()">🖨️ পুরো কুপন রিপোর্ট PDF / Print</button>
     <div id="feastAdminList" class="admin-list"></div>
   </div>
 
@@ -1180,6 +1181,90 @@ function feastIsOpen(settings){
   return settings?.is_active !== false && today < close;
 }
 function bnNumber(n){return String(n).replace(/[0-9]/g,d=>"০১২৩৪৫৬৭৮৯"[d]);}
+function printFeastReport(){
+  if(!currentAdminUser){ alert("আগে Admin Login করুন।"); return; }
+
+  const rows = Array.isArray(window.feastRowsCache) ? window.feastRowsCache : [];
+  if(!rows.length){ alert("প্রিন্ট করার মতো কোনো কুপন রেকর্ড নেই।"); return; }
+
+  const totalFamilies = rows.length;
+  const totalCoupons = rows.reduce((sum, x) => sum + Number(x.family_count || 0), 0);
+  const generatedAt = new Date().toLocaleString("bn-IN", {dateStyle:"medium", timeStyle:"short"});
+
+  const tableRows = rows.map((x, i) => `
+    <tr>
+      <td>${bnNumber(i + 1)}</td>
+      <td>${escapeHtml(x.name || "—")}</td>
+      <td>${escapeHtml(x.phone || "—")}</td>
+      <td>${escapeHtml(x.coupon_no || "—")}</td>
+      <td>${bnNumber(Number(x.family_count || 0))}</td>
+    </tr>
+  `).join("");
+
+  const report = `
+  <!doctype html>
+  <html lang="bn">
+  <head>
+    <meta charset="utf-8">
+    <title>ভুরিভোজ কুপন রিপোর্ট</title>
+    <style>
+      @page{size:A4 portrait;margin:12mm}
+      *{box-sizing:border-box}
+      body{font-family:"Noto Sans Bengali","Nirmala UI",Arial,sans-serif;color:#111;margin:0}
+      h1,h2,p{text-align:center;margin:4px 0}
+      h1{font-size:22px}
+      h2{font-size:18px}
+      .meta{font-size:12px;color:#555;margin:10px 0 14px}
+      table{width:100%;border-collapse:collapse;font-size:12px}
+      th,td{border:1px solid #555;padding:7px 5px;text-align:center;vertical-align:middle}
+      th{background:#f1e1c7}
+      td:nth-child(2),td:nth-child(3){text-align:left}
+      tfoot td{font-weight:800;background:#fff4dc}
+      .summary{display:flex;justify-content:space-between;gap:10px;margin:12px 0;font-weight:800}
+      .sign{margin-top:35px;text-align:right;font-size:12px}
+      @media print{.no-print{display:none}}
+    </style>
+  </head>
+  <body>
+    <h1>উত্তর নীলাচল সর্বজনীন দুর্গোৎসব কমিটি</h1>
+    <h2>নবমীর ভুরিভোজ — কুপন বিক্রয় / নাম নথিভুক্তির পূর্ণ রিপোর্ট</h2>
+    <p class="meta">রিপোর্ট তৈরি: ${escapeHtml(generatedAt)}</p>
+    <div class="summary">
+      <span>মোট নাম / পরিবার: ${bnNumber(totalFamilies)}</span>
+      <span>মোট কুপন / ব্যক্তি: ${bnNumber(totalCoupons)}</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>ক্রমিক</th>
+          <th>নাম</th>
+          <th>মোবাইল নম্বর</th>
+          <th>কুপন নম্বর</th>
+          <th>কুপন সংখ্যা</th>
+        </tr>
+      </thead>
+      <tbody>${tableRows}</tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4">সর্বমোট</td>
+          <td>${bnNumber(totalCoupons)}</td>
+        </tr>
+      </tfoot>
+    </table>
+    <p class="sign">অ্যাডমিন স্বাক্ষর: ____________________</p>
+    <script>
+      window.onload = function(){ setTimeout(function(){ window.print(); }, 300); };
+    <\/script>
+  </body>
+  </html>`;
+
+  const win = window.open("", "_blank");
+  if(!win){ alert("পপ-আপ ব্লক হয়েছে। ব্রাউজারে Pop-up Allow করুন।"); return; }
+  win.document.open();
+  win.document.write(report);
+  win.document.close();
+}
+
 function renderFeastRows(rows){
   const adminList=document.getElementById("feastAdminList");
   const totalFamilies=rows.length; const totalPeople=rows.reduce((a,x)=>a+Number(x.family_count||0),0);
@@ -1193,7 +1278,9 @@ async function loadFeastData(){
   const content=document.getElementById("feastPublicContent"),closed=document.getElementById("feastClosedMessage");
   if(content)content.style.display=open?"block":"none"; if(closed)closed.style.display=open?"none":"block";
   const rowsResult=await supabaseClient.from("feast_signups").select("*").order("created_at",{ascending:true});
-  const rows=rowsResult.data||[]; renderFeastRows(rows);
+  const rows=rowsResult.data||[];
+  window.feastRowsCache = rows;
+  renderFeastRows(rows);
   const active=document.getElementById("feastActive"),date=document.getElementById("feastCloseDate");
   if(active)active.value=String(settings.is_active!==false); if(date)date.value=settings.close_date||FEAST_CLOSE_DEFAULT;
 }
