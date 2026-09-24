@@ -103,6 +103,8 @@ nav { position: sticky; top: 0; z-index: 1000; }
   .nav-inner a { padding: 12px 16px; font-size: 15px; }
 }
 
+
+.coupon-card{max-width:620px;margin:18px auto;padding:22px;border:3px solid #b8860b;border-radius:18px;background:linear-gradient(135deg,#fff9df,#fff);box-shadow:0 5px 18px #0002;color:#3d160b}.coupon-card h2,.coupon-card h3{text-align:center;margin:4px 0}.coupon-card .coupon-line{display:flex;justify-content:space-between;gap:14px;border-bottom:1px dashed #c7a86a;padding:9px 0}.coupon-card .coupon-note{text-align:center;font-weight:700;margin-top:15px}.coupon-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}@media print{body *{visibility:hidden!important}.coupon-card,.coupon-card *{visibility:visible!important}.coupon-card{position:absolute;left:0;top:0;width:100%;max-width:none;box-shadow:none!important}}
 </style>
 </head>
 <body>
@@ -195,6 +197,7 @@ nav { position: sticky; top: 0; z-index: 1000; }
             <button class="btn" type="submit">নাম নথিভুক্ত করুন</button>
           </form>
           <p id="feastSignupMessage" style="font-weight:800"></p>
+          <div id="feastCoupon" style="display:none"></div>
           <p style="margin-top:12px;color:#666;font-size:0.95em">আপনার নাম নথিভুক্ত করার পর তালিকা ও মোট সংখ্যাটি শুধুমাত্র অ্যাডমিন প্যানেলে দেখা যাবে।</p>
         </div>
       </div>
@@ -1141,7 +1144,7 @@ function renderFeastRows(rows){
   const adminList=document.getElementById("feastAdminList");
   const totalFamilies=rows.length; const totalPeople=rows.reduce((a,x)=>a+Number(x.family_count||0),0);
   const summary=`<div style="margin:10px 0 14px;padding:12px;border:1px solid #e5c3c3;border-radius:10px;background:#fff7f7;color:#7d0f18;font-weight:800">মোট পরিবার: ${bnNumber(totalFamilies)} | মোট ব্যক্তি: ${bnNumber(totalPeople)} জন</div>`;
-  if(adminList)adminList.innerHTML=summary+(rows.map(x=>`<div class="admin-row"><div><b>${escapeHtml(x.name)}</b><small>মোবাইল: ${escapeHtml(x.phone||"—")}<br>পরিবারের সদস্য: ${bnNumber(x.family_count)}</small></div><button class="btn" style="background:#a00" onclick="deleteFeastSignup('${x.id}')">ডিলিট</button></div>`).join("") || '<small>কোনো নাম নেই</small>');
+  if(adminList)adminList.innerHTML=summary+(rows.map(x=>`<div class="admin-row"><div><b>${escapeHtml(x.name)}</b><small>কুপন: ${escapeHtml(x.coupon_no||"—")}<br>মোবাইল: ${escapeHtml(x.phone||"—")}<br>পরিবারের সদস্য: ${bnNumber(x.family_count)}</small></div><button class="btn" style="background:#a00" onclick="deleteFeastSignup('${x.id}')">ডিলিট</button></div>`).join("") || '<small>কোনো নাম নেই</small>');
 }
 async function loadFeastData(){
   const settingsResult=await supabaseClient.from("feast_settings").select("*").eq("id",1).maybeSingle();
@@ -1159,14 +1162,27 @@ async function submitFeastSignup(event){
   const settingsResult=await supabaseClient.from("feast_settings").select("*").eq("id",1).maybeSingle();
   const settings=settingsResult.data||{is_active:true,close_date:FEAST_CLOSE_DEFAULT};
   if(!feastIsOpen(settings)){alert("নাম লেখার সময়সীমা শেষ হয়েছে।");await loadFeastData();return;}
-  const name=document.getElementById("feastName").value.trim(); const phone=document.getElementById("feastPhone").value.trim(); const family_count=Number(document.getElementById("feastFamilyCount").value);
+  const name=document.getElementById("feastName").value.trim();
+  const phone=document.getElementById("feastPhone").value.trim();
+  const family_count=Number(document.getElementById("feastFamilyCount").value);
   if(!name||!phone||family_count<1){alert("নাম, মোবাইল নম্বর ও পরিবারের সদস্য সংখ্যা পূরণ করুন।");return;}
-  const r=await supabaseClient.from("feast_signups").insert({name,phone,family_count});
+  if(!/^[0-9+()\- ]{10,20}$/.test(phone)){alert("সঠিক মোবাইল নম্বর লিখুন।");return;}
+  const coupon_no="NNSC-NB-"+Date.now().toString().slice(-6)+Math.floor(10+Math.random()*90);
+  const r=await supabaseClient.from("feast_signups").insert({name,phone,family_count,coupon_no});
   const msg=document.getElementById("feastSignupMessage");
   if(r.error){if(msg)msg.textContent="সেভ হয়নি: "+r.error.message;return;}
-  document.getElementById("feastSignupForm").reset();document.getElementById("feastFamilyCount").value=1;
-  if(msg)msg.textContent="✅ আপনার নাম সফলভাবে নথিভুক্ত হয়েছে।"; await loadFeastData();
+  const coupon=document.getElementById("feastCoupon");
+  if(coupon){
+    coupon.innerHTML=`<div class="coupon-card" id="printableFeastCoupon"><div style="text-align:center;font-size:34px">🍽️ 🌺 🙏</div><h2>নবমীর ভুরিভোজ ২০২৬</h2><h3>উত্তর নীলাচল সর্বজনীন দুর্গোৎসব কমিটি</h3><p style="text-align:center;margin:5px 0">অংশগ্রহণের কুপন</p><div class="coupon-line"><b>কুপন নম্বর</b><strong>${escapeHtml(coupon_no)}</strong></div><div class="coupon-line"><b>নাম</b><span>${escapeHtml(name)}</span></div><div class="coupon-line"><b>মোবাইল নম্বর</b><span>${escapeHtml(phone)}</span></div><div class="coupon-line"><b>পরিবারের সদস্য</b><strong>${bnNumber(family_count)} জন</strong></div><div class="coupon-note">এই কুপনটি স্ক্রিনশট নিয়ে রাখুন অথবা প্রিন্ট করুন।<br>মা দুর্গার আশীর্বাদে সকলের মঙ্গল হোক। 🙏</div></div><div class="coupon-actions"><button class="btn" type="button" onclick="printFeastCoupon()">🖨️ কুপন প্রিন্ট করুন</button></div>`;
+    coupon.style.display="block";
+    coupon.scrollIntoView({behavior:"smooth",block:"center"});
+  }
+  document.getElementById("feastSignupForm").reset();
+  document.getElementById("feastFamilyCount").value=1;
+  if(msg)msg.textContent="✅ আপনার নাম সফলভাবে নথিভুক্ত হয়েছে। নিচে আপনার কুপন দেওয়া হয়েছে।";
 }
+function printFeastCoupon(){window.print();}
+
 async function saveFeastSettings(){
   if(!await requireAdmin())return;
   const is_active=document.getElementById("feastActive").value==="true"; const close_date=document.getElementById("feastCloseDate").value||FEAST_CLOSE_DEFAULT;
