@@ -104,7 +104,47 @@ nav { position: sticky; top: 0; z-index: 1000; }
 }
 
 
-.coupon-card{max-width:620px;margin:18px auto;padding:22px;border:3px solid #b8860b;border-radius:18px;background:linear-gradient(135deg,#fff9df,#fff);box-shadow:0 5px 18px #0002;color:#3d160b}.coupon-card h2,.coupon-card h3{text-align:center;margin:4px 0}.coupon-card .coupon-line{display:flex;justify-content:space-between;gap:14px;border-bottom:1px dashed #c7a86a;padding:9px 0}.coupon-card .coupon-note{text-align:center;font-weight:700;margin-top:15px}.coupon-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}@media print{body *{visibility:hidden!important}.coupon-card,.coupon-card *{visibility:visible!important}.coupon-card{position:absolute;left:0;top:0;width:100%;max-width:none;box-shadow:none!important}}
+.coupon-card{max-width:620px;margin:18px auto;padding:22px;border:3px solid #b8860b;border-radius:18px;background:linear-gradient(135deg,#fff9df,#fff);box-shadow:0 5px 18px #0002;color:#3d160b}.coupon-card h2,.coupon-card h3{text-align:center;margin:4px 0}.coupon-card .coupon-line{display:flex;justify-content:space-between;gap:14px;border-bottom:1px dashed #c7a86a;padding:9px 0}.coupon-card .coupon-note{text-align:center;font-weight:700;margin-top:15px}.coupon-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}@media print{
+  @page{size:A4 portrait;margin:10mm}
+  html,html body{
+    width:210mm!important;
+    height:auto!important;
+    min-height:0!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:visible!important;
+    background:#fff!important;
+  }
+  body.print-mode > *{display:none!important}
+  body.print-mode > #printOnlyCoupon{
+    display:block!important;
+    visibility:visible!important;
+    position:absolute!important;
+    top:0!important;
+    left:0!important;
+    width:190mm!important;
+    max-width:190mm!important;
+    height:auto!important;
+    min-height:0!important;
+    margin:0!important;
+    padding:8mm!important;
+    background:#fff!important;
+    border:2px solid #b8860b!important;
+    border-radius:12px!important;
+    box-shadow:none!important;
+    overflow:visible!important;
+    page-break-before:avoid!important;
+    page-break-after:avoid!important;
+    page-break-inside:avoid!important;
+    break-before:avoid-page!important;
+    break-after:avoid-page!important;
+    break-inside:avoid-page!important;
+  }
+  #printOnlyCoupon,
+  #printOnlyCoupon *{visibility:visible!important}
+  #printOnlyCoupon .coupon-actions{display:none!important}
+  #printOnlyCoupon .coupon-line{break-inside:avoid!important;page-break-inside:avoid!important}
+}
 </style>
 </head>
 <body>
@@ -1167,7 +1207,26 @@ async function submitFeastSignup(event){
   const family_count=Number(document.getElementById("feastFamilyCount").value);
   if(!name||!phone||family_count<1){alert("নাম, মোবাইল নম্বর ও পরিবারের সদস্য সংখ্যা পূরণ করুন।");return;}
   if(!/^[0-9+()\- ]{10,20}$/.test(phone)){alert("সঠিক মোবাইল নম্বর লিখুন।");return;}
-  const coupon_no="NNSC-NB-"+Date.now().toString().slice(-6)+Math.floor(10+Math.random()*90);
+  // ধারাবাহিক কুপন নম্বর: UNSDC001, UNSDC002, UNSDC003 ...
+  // আগের UNSDC নম্বরগুলোর মধ্যে সর্বোচ্চ নম্বর বের করে পরের নম্বর তৈরি করা হচ্ছে।
+  const existingCoupons = await supabaseClient
+    .from("feast_signups")
+    .select("coupon_no");
+
+  if (existingCoupons.error) {
+    if (msg) msg.textContent = "কুপন নম্বর তৈরি করা যায়নি: " + existingCoupons.error.message;
+    return;
+  }
+
+  let maxCouponNumber = 0;
+  (existingCoupons.data || []).forEach(row => {
+    const match = String(row.coupon_no || "").trim().match(/^UNSDC(\\d+)$/i);
+    if (match) {
+      maxCouponNumber = Math.max(maxCouponNumber, Number(match[1]));
+    }
+  });
+
+  const coupon_no = "UNSDC" + String(maxCouponNumber + 1).padStart(3, "0");
   const r=await supabaseClient.from("feast_signups").insert({name,phone,family_count,coupon_no});
   const msg=document.getElementById("feastSignupMessage");
   if(r.error){if(msg)msg.textContent="সেভ হয়নি: "+r.error.message;return;}
@@ -1181,7 +1240,27 @@ async function submitFeastSignup(event){
   document.getElementById("feastFamilyCount").value=1;
   if(msg)msg.textContent="✅ আপনার নাম সফলভাবে নথিভুক্ত হয়েছে। নিচে আপনার কুপন দেওয়া হয়েছে।";
 }
-function printFeastCoupon(){window.print();}
+function printFeastCoupon(){
+  const source=document.getElementById("printableFeastCoupon");
+  if(!source)return;
+
+  const previous=document.getElementById("printOnlyCoupon");
+  if(previous)previous.remove();
+
+  const printCopy=source.cloneNode(true);
+  printCopy.id="printOnlyCoupon";
+
+  document.body.classList.add("print-mode");
+  document.body.appendChild(printCopy);
+
+  const cleanup=()=>{
+    printCopy.remove();
+    document.body.classList.remove("print-mode");
+  };
+
+  window.addEventListener("afterprint",cleanup,{once:true});
+  setTimeout(()=>window.print(),50);
+}
 
 async function saveFeastSettings(){
   if(!await requireAdmin())return;
