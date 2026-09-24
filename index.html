@@ -182,6 +182,23 @@ nav { position: sticky; top: 0; z-index: 1000; }
 
     <div class="card" id="contributors" style="margin-top:14px"><div class="card-title">🌺 পুজোতে যাঁদের সাহায্যের কথা না বললেই নয়</div><div class="card-body"><p>যাঁদের সহযোগিতায় আমাদের পুজোর আয়োজন সম্পূর্ণ হচ্ছে, তাঁদের প্রতি আন্তরিক কৃতজ্ঞতা।</p><div id="publicContributorsGrid" class="gallery" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-top:14px"></div><p id="contributorsEmpty" style="margin-top:12px;color:#777">সহযোগীদের তালিকা শীঘ্রই প্রকাশিত হবে।</p></div></div>
 
+    <div class="card" id="feast" style="margin-top:14px">
+      <div class="card-title">🍽️ নবমীর ভুরিভোজে নাম নথিভুক্ত করুন</div>
+      <div class="card-body">
+        <p id="feastClosedMessage" style="display:none;color:#9b1c1c;font-weight:800">নবমীর ভুরিভোজের নাম লেখার সময়সীমা শেষ হয়েছে। দশমী থেকে এই বিভাগটি বন্ধ রয়েছে।</p>
+        <div id="feastPublicContent">
+          <p>যাঁরা নবমীর ভুরিভোজে অংশগ্রহণ করবেন, তাঁরা নিজের নাম ও পরিবারের সদস্য সংখ্যা লিখে নাম নথিভুক্ত করুন।</p>
+          <form id="feastSignupForm" onsubmit="submitFeastSignup(event)" style="display:grid;gap:10px;max-width:520px">
+            <label>আপনার নাম</label><input id="feastName" required maxlength="120" placeholder="নাম লিখুন">
+            <label>একই পরিবারের মোট কতজন?</label><input id="feastFamilyCount" type="number" min="1" max="30" required value="1">
+            <button class="btn" type="submit">নাম নথিভুক্ত করুন</button>
+          </form>
+          <p id="feastSignupMessage" style="font-weight:800"></p>
+          <p style="margin-top:12px;color:#666;font-size:0.95em">আপনার নাম নথিভুক্ত করার পর তালিকা ও মোট সংখ্যাটি শুধুমাত্র অ্যাডমিন প্যানেলে দেখা যাবে।</p>
+        </div>
+      </div>
+    </div>
+
     <div class="card" id="gallery" style="margin-top:14px;display:none"><div class="card-title">🖼 ছবির গ্যালারি</div><div class="card-body"><div id="publicGalleryGrid" class="gallery">
       <div class="placeholder-tile">🪔</div><div class="placeholder-tile">🌺</div><div class="placeholder-tile">🙏</div><div class="placeholder-tile">🎉</div><div class="placeholder-tile">🥁</div><div class="placeholder-tile">✨</div>
     </div><p id="galleryEmptyText" style="margin-top:12px;color:#777">অ্যাডমিন প্যানেল থেকে ছবি আপলোড করলে এখানে দেখা যাবে।</p></div></div>
@@ -265,6 +282,18 @@ nav { position: sticky; top: 0; z-index: 1000; }
     </div>
     <br><button class="btn" onclick="uploadGalleryFiles()">ছবি আপলোড</button>
     <div id="galleryAdminList" class="admin-list"></div>
+  </div>
+
+  <div class="admin-section">
+    <h3>🍽️ নবমীর ভুরিভোজের নামের তালিকা</h3>
+    <p>এই বিভাগটি সক্রিয় থাকলে সাধারণ দর্শকরা নাম লিখতে পারবেন। ২১ অক্টোবর ২০২৬ (দশমী) থেকে এটি স্বয়ংক্রিয়ভাবে বন্ধ হবে।</p>
+    <div class="admin-grid">
+      <div><label>সক্রিয়?</label><select id="feastActive"><option value="true">হ্যাঁ</option><option value="false">না</option></select></div>
+      <div><label>বন্ধের তারিখ</label><input id="feastCloseDate" type="date" value="2026-10-21"></div>
+    </div>
+    <br><button class="btn" onclick="saveFeastSettings()">সেটিংস সেভ</button>
+    <button class="btn" style="background:#777" onclick="loadFeastData()">তালিকা রিফ্রেশ</button>
+    <div id="feastAdminList" class="admin-list"></div>
   </div>
 
   <div class="admin-section"><h3>🌺 সহযোগী / সাহায্যকারীদের তালিকা</h3><p>নাম ও ছবি যোগ করুন। “সক্রিয়” করলে সাধারণ দর্শকরা দেখতে পাবেন; ডিঅ্যাক্টিভ করলে শুধু অ্যাডমিন প্যানেলে থাকবে।</p><div class="admin-grid"><input id="contributorId" type="hidden"><div><label>নাম</label><input id="contributorName" placeholder="সহযোগীর নাম"></div><div><label>সক্রিয়?</label><select id="contributorActive"><option value="true">হ্যাঁ</option><option value="false">না</option></select></div><div><label>ছবির URL (ঐচ্ছিক)</label><input id="contributorPhoto" placeholder="https://..."></div><div><label>ছবি আপলোড (সর্বোচ্চ ৫০ KB)</label><input id="contributorPhotoFile" type="file" accept="image/*"></div></div><br><button class="btn" onclick="saveContributor()">সেভ করুন</button><button class="btn" style="background:#777" onclick="clearContributorForm()">ফর্ম পরিষ্কার</button><div id="contributorAdminList" class="admin-list"></div></div>
@@ -576,7 +605,7 @@ async function loginAdmin(){
   updateAdminNav();
   document.getElementById("adminPanel").classList.add("show");
   closeAdmin(); showStatus("✅ Admin লগইন সফল",true);
-  await Promise.all([loadAllSettings(),loadNotices(),loadEvents(),loadGallery(),loadMembers(),loadContributors()]);
+  await Promise.all([loadAllSettings(),loadNotices(),loadEvents(),loadGallery(),loadMembers(),loadContributors(),loadFeastData()]);
 }
 async function logoutAdmin(){
   await supabaseClient.auth.signOut();
@@ -1099,17 +1128,64 @@ function contributorCardHtml(x){return `<div class="member"><div class="avatar" 
 async function loadContributors(){const pub=await supabaseClient.from("contributors").select("*").eq("is_active",true).order("created_at",{ascending:true});const grid=document.getElementById("publicContributorsGrid");const empty=document.getElementById("contributorsEmpty");if(grid)grid.innerHTML=(pub.data||[]).map(contributorCardHtml).join("");if(empty)empty.style.display=(pub.data||[]).length?"none":"block";if(!currentAdminUser)return;const all=await supabaseClient.from("contributors").select("*").order("created_at",{ascending:true});window.contributorCache=all.data||[];const list=document.getElementById("contributorAdminList");if(list)list.innerHTML=window.contributorCache.map(x=>`<div class="admin-row"><div><b>${escapeHtml(x.name)}</b><small>${x.is_active?"সক্রিয়":"ডিঅ্যাক্টিভ"}</small></div><div><button class="btn" onclick="editContributor('${x.id}')">এডিট</button><button class="btn" style="background:#a00" onclick="deleteContributor('${x.id}')">ডিলিট</button></div></div>`).join("")||"<small>কোনো সহযোগী নেই</small>";}
 function editContributor(id){const x=(window.contributorCache||[]).find(a=>a.id===id);if(!x)return;document.getElementById("contributorId").value=x.id;document.getElementById("contributorName").value=x.name||"";document.getElementById("contributorPhoto").value=x.photo_url||"";document.getElementById("contributorActive").value=String(!!x.is_active);document.getElementById("contributorPhotoFile").value="";}
 async function deleteContributor(id){if(!confirm("এই সহযোগীর তথ্য ডিলিট করবেন?"))return;const r=await supabaseClient.from("contributors").delete().eq("id",id);if(r.error)return alert(r.error.message);await loadContributors();}
+const FEAST_CLOSE_DEFAULT = "2026-10-21";
+function feastIsOpen(settings){
+  const closeDate = settings?.close_date || FEAST_CLOSE_DEFAULT;
+  const today = new Date();
+  const close = new Date(closeDate + "T00:00:00+05:30");
+  return settings?.is_active !== false && today < close;
+}
+function bnNumber(n){return String(n).replace(/[0-9]/g,d=>"০১২৩৪৫৬৭৮৯"[d]);}
+function renderFeastRows(rows){
+  const adminList=document.getElementById("feastAdminList");
+  const totalFamilies=rows.length; const totalPeople=rows.reduce((a,x)=>a+Number(x.family_count||0),0);
+  const summary=`<div style="margin:10px 0 14px;padding:12px;border:1px solid #e5c3c3;border-radius:10px;background:#fff7f7;color:#7d0f18;font-weight:800">মোট পরিবার: ${bnNumber(totalFamilies)} | মোট ব্যক্তি: ${bnNumber(totalPeople)} জন</div>`;
+  if(adminList)adminList.innerHTML=summary+(rows.map(x=>`<div class="admin-row"><div><b>${escapeHtml(x.name)}</b><small>পরিবারের সদস্য: ${bnNumber(x.family_count)}</small></div><button class="btn" style="background:#a00" onclick="deleteFeastSignup('${x.id}')">ডিলিট</button></div>`).join("") || '<small>কোনো নাম নেই</small>');
+}
+async function loadFeastData(){
+  const settingsResult=await supabaseClient.from("feast_settings").select("*").eq("id",1).maybeSingle();
+  const settings=settingsResult.data||{is_active:true,close_date:FEAST_CLOSE_DEFAULT};
+  const open=feastIsOpen(settings);
+  const content=document.getElementById("feastPublicContent"),closed=document.getElementById("feastClosedMessage");
+  if(content)content.style.display=open?"block":"none"; if(closed)closed.style.display=open?"none":"block";
+  const rowsResult=await supabaseClient.from("feast_signups").select("*").order("created_at",{ascending:true});
+  const rows=rowsResult.data||[]; renderFeastRows(rows);
+  const active=document.getElementById("feastActive"),date=document.getElementById("feastCloseDate");
+  if(active)active.value=String(settings.is_active!==false); if(date)date.value=settings.close_date||FEAST_CLOSE_DEFAULT;
+}
+async function submitFeastSignup(event){
+  event.preventDefault();
+  const settingsResult=await supabaseClient.from("feast_settings").select("*").eq("id",1).maybeSingle();
+  const settings=settingsResult.data||{is_active:true,close_date:FEAST_CLOSE_DEFAULT};
+  if(!feastIsOpen(settings)){alert("নাম লেখার সময়সীমা শেষ হয়েছে।");await loadFeastData();return;}
+  const name=document.getElementById("feastName").value.trim(); const family_count=Number(document.getElementById("feastFamilyCount").value);
+  if(!name||family_count<1)return;
+  const r=await supabaseClient.from("feast_signups").insert({name,family_count});
+  const msg=document.getElementById("feastSignupMessage");
+  if(r.error){if(msg)msg.textContent="সেভ হয়নি: "+r.error.message;return;}
+  document.getElementById("feastSignupForm").reset();document.getElementById("feastFamilyCount").value=1;
+  if(msg)msg.textContent="✅ আপনার নাম সফলভাবে নথিভুক্ত হয়েছে।"; await loadFeastData();
+}
+async function saveFeastSettings(){
+  if(!await requireAdmin())return;
+  const is_active=document.getElementById("feastActive").value==="true"; const close_date=document.getElementById("feastCloseDate").value||FEAST_CLOSE_DEFAULT;
+  const r=await supabaseClient.from("feast_settings").upsert({id:1,is_active,close_date});
+  if(r.error)return alert(r.error.message); await loadFeastData(); alert("✅ ভুরিভোজের সেটিংস সেভ হয়েছে।");
+}
+async function deleteFeastSignup(id){if(!await requireAdmin())return;if(!confirm("এই নামটি ডিলিট করবেন?"))return;const r=await supabaseClient.from("feast_signups").delete().eq("id",id);if(r.error)return alert(r.error.message);await loadFeastData();}
+
 function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 // Load public settings for every visitor, without requiring admin login.
 loadPublicSettings();
 loadContributors();
+loadFeastData();
 
 supabaseClient.auth.onAuthStateChange(async(_event,session)=>{
   if(!session?.user)return;
   if(await isAdminUser(session.user.id)){
     currentAdminUser=session.user;
     document.getElementById("adminPanel").classList.add("show");
-    await Promise.all([loadAllSettings(),loadNotices(),loadEvents(),loadGallery(),loadMembers(),loadContributors()]);
+    await Promise.all([loadAllSettings(),loadNotices(),loadEvents(),loadGallery(),loadMembers(),loadContributors(),loadFeastData()]);
   }
 });
 </script>
