@@ -225,9 +225,9 @@ nav { position: sticky; top: 0; z-index: 1000; }
     <div class="card" id="contributors" style="margin-top:14px"><div class="card-title">🌺 পুজোতে যাঁদের সাহায্যের কথা না বললেই নয়</div><div class="card-body"><p>যাঁদের সহযোগিতায় আমাদের পুজোর আয়োজন সম্পূর্ণ হচ্ছে, তাঁদের প্রতি আন্তরিক কৃতজ্ঞতা।</p><div id="publicContributorsGrid" class="gallery" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-top:14px"></div><p id="contributorsEmpty" style="margin-top:12px;color:#777">সহযোগীদের তালিকা শীঘ্রই প্রকাশিত হবে।</p></div></div>
 
     <div class="card" id="feast" style="margin-top:14px">
-      <div class="card-title">🍽️ নবমীর ভুরিভোজে নাম নথিভুক্ত করুন</div>
+      <div class="card-title">🍽️ নবমীর প্রীতিভোজে নাম নথিভুক্ত করুন</div>
       <div class="card-body">
-        <p id="feastClosedMessage" style="display:none;color:#9b1c1c;font-weight:800">নবমীর ভুরিভোজের নাম লেখার সময়সীমা শেষ হয়েছে। দশমী থেকে এই বিভাগটি বন্ধ রয়েছে।</p>
+        <p id="feastClosedMessage" style="display:none;color:#9b1c1c;font-weight:800">নবমীর প্রীতিভোজের নাম লেখার সময়সীমা শেষ হয়েছে। দশমী থেকে এই বিভাগটি বন্ধ রয়েছে।</p>
         <div id="feastSearchBox" style="margin:0 0 18px;padding:14px;border:2px solid #e5c3c3;border-radius:12px;background:#fff8f8;max-width:520px">
           <h3 style="margin:0 0 8px;color:#8f101c">📱 আগে নাম নথিভুক্ত হয়েছে কিনা দেখুন</h3>
           <p style="margin:0 0 8px;color:#555">আপনার মোবাইল নম্বর দিয়ে খুঁজে দেখুন, আগে নাম নথিভুক্ত করা হয়েছে কি না।</p>
@@ -238,11 +238,11 @@ nav { position: sticky; top: 0; z-index: 1000; }
           <p id="feastSearchMessage" style="margin:10px 0 0;font-weight:800"></p>
         </div>
         <div id="feastPublicContent">
-          <p>যাঁরা নবমীর ভুরিভোজে অংশগ্রহণ করবেন, তাঁরা নিজের নাম ও পরিবারের সদস্য সংখ্যা লিখে নাম নথিভুক্ত করুন।</p>
+          <p>যাঁরা নবমীর প্রীতিভোজে অংশগ্রহণ করবেন, তাঁরা নিজের নাম ও পরিবারের সদস্য সংখ্যা লিখে নাম নথিভুক্ত করুন।</p>
           <form id="feastSignupForm" onsubmit="submitFeastSignup(event)" style="display:grid;gap:10px;max-width:520px">
             <label>আপনার নাম</label><input id="feastName" required maxlength="120" placeholder="নাম লিখুন">
             <label>মোবাইল নম্বর <span style="color:#a00">*</span></label><input id="feastPhone" type="tel" required inputmode="numeric" pattern="[0-9+()\- ]{10,20}" maxlength="20" placeholder="মোবাইল নম্বর লিখুন">
-            <label>একই পরিবারের মোট কতজন?</label><input id="feastFamilyCount" type="number" min="1" max="30" required value="1">
+            <label>একই পরিবারের মোট কতজন?</label><input id="feastFamilyCount" type="number" min="1" max="30" required placeholder="পরিবারের মোট সদস্য সংখ্যা লিখুন">
             <button class="btn" type="submit">নাম নথিভুক্ত করুন</button>
           </form>
           <p id="feastSignupMessage" style="font-weight:800"></p>
@@ -338,7 +338,7 @@ nav { position: sticky; top: 0; z-index: 1000; }
   </div>
 
   <div class="admin-section">
-    <h3>🍽️ নবমীর ভুরিভোজের নামের তালিকা</h3>
+    <h3>🍽️ নবমীর প্রীতিভোজের নামের তালিকা</h3>
     <p>এই বিভাগটি সক্রিয় থাকলে সাধারণ দর্শকরা নাম লিখতে পারবেন। ২১ অক্টোবর ২০২৬ (দশমী) থেকে এটি স্বয়ংক্রিয়ভাবে বন্ধ হবে।</p>
     <div class="admin-grid">
       <div><label>সক্রিয়?</label><select id="feastActive"><option value="true">হ্যাঁ</option><option value="false">না</option></select></div>
@@ -1216,7 +1216,7 @@ function printFeastReport(){
   <html lang="bn">
   <head>
     <meta charset="utf-8">
-    <title>ভুরিভোজ কুপন রিপোর্ট</title>
+    <title>প্রীতিভোজ কুপন রিপোর্ট</title>
     <style>
       @page{size:A4 portrait;margin:12mm}
       *{box-sizing:border-box}
@@ -1237,7 +1237,7 @@ function printFeastReport(){
   </head>
   <body>
     <h1>উত্তর নীলাচল সর্বজনীন দুর্গোৎসব কমিটি</h1>
-    <h2>নবমীর ভুরিভোজ — কুপন বিক্রয় / নাম নথিভুক্তির পূর্ণ রিপোর্ট</h2>
+    <h2>নবমীর প্রীতিভোজ — কুপন বিক্রয় / নাম নথিভুক্তির পূর্ণ রিপোর্ট</h2>
     <p class="meta">রিপোর্ট তৈরি: ${escapeHtml(generatedAt)}</p>
     <div class="summary">
       <span>মোট নাম / পরিবার: ${bnNumber(totalFamilies)}</span>
@@ -1388,7 +1388,7 @@ async function submitFeastSignup(event){
   if(coupon){
     coupon.innerHTML=`<div class="coupon-card" id="printableFeastCoupon">
       <div style="text-align:center;font-size:34px">🍽️ 🌺 🙏</div>
-      <h2>নবমীর ভুরিভোজ ২০২৬</h2>
+      <h2>নবমীর প্রীতিভোজ ২০২৬</h2>
       <h3>উত্তর নীলাচল সর্বজনীন দুর্গোৎসব কমিটি</h3>
       <p style="text-align:center;margin:5px 0">অংশগ্রহণের কুপন</p>
       <div class="coupon-line"><b>কুপন নম্বর</b><strong>${escapeHtml(coupon_no)}</strong></div>
@@ -1406,7 +1406,7 @@ async function submitFeastSignup(event){
   }
 
   document.getElementById("feastSignupForm").reset();
-  document.getElementById("feastFamilyCount").value=1;
+  document.getElementById("feastFamilyCount").value="";
   if(msg)msg.textContent="✅ আপনার নাম সফলভাবে নথিভুক্ত হয়েছে। নিচে আপনার কুপন দেওয়া হয়েছে।";
 }
 function printFeastCoupon(){
@@ -1435,7 +1435,7 @@ async function saveFeastSettings(){
   if(!await requireAdmin())return;
   const is_active=document.getElementById("feastActive").value==="true"; const close_date=document.getElementById("feastCloseDate").value||FEAST_CLOSE_DEFAULT;
   const r=await supabaseClient.from("feast_settings").upsert({id:1,is_active,close_date});
-  if(r.error)return alert(r.error.message); await loadFeastData(); alert("✅ ভুরিভোজের সেটিংস সেভ হয়েছে।");
+  if(r.error)return alert(r.error.message); await loadFeastData(); alert("✅ প্রীতিভোজের সেটিংস সেভ হয়েছে।");
 }
 async function deleteFeastSignup(id){if(!await requireAdmin())return;if(!confirm("এই নামটি ডিলিট করবেন?"))return;const r=await supabaseClient.from("feast_signups").delete().eq("id",id);if(r.error)return alert(r.error.message);await loadFeastData();}
 
