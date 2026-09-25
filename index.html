@@ -228,6 +228,15 @@ nav { position: sticky; top: 0; z-index: 1000; }
       <div class="card-title">🍽️ নবমীর ভুরিভোজে নাম নথিভুক্ত করুন</div>
       <div class="card-body">
         <p id="feastClosedMessage" style="display:none;color:#9b1c1c;font-weight:800">নবমীর ভুরিভোজের নাম লেখার সময়সীমা শেষ হয়েছে। দশমী থেকে এই বিভাগটি বন্ধ রয়েছে।</p>
+        <div id="feastSearchBox" style="margin:0 0 18px;padding:14px;border:2px solid #e5c3c3;border-radius:12px;background:#fff8f8;max-width:520px">
+          <h3 style="margin:0 0 8px;color:#8f101c">📱 আগে নাম নথিভুক্ত হয়েছে কিনা দেখুন</h3>
+          <p style="margin:0 0 8px;color:#555">আপনার মোবাইল নম্বর দিয়ে খুঁজে দেখুন, আগে নাম নথিভুক্ত করা হয়েছে কি না।</p>
+          <form onsubmit="searchFeastSignup(event)" style="display:grid;gap:8px">
+            <input id="feastSearchPhone" type="tel" inputmode="numeric" maxlength="20" placeholder="মোবাইল নম্বর লিখুন" required>
+            <button class="btn" type="submit" style="background:#555">🔍 সার্চ করুন</button>
+          </form>
+          <p id="feastSearchMessage" style="margin:10px 0 0;font-weight:800"></p>
+        </div>
         <div id="feastPublicContent">
           <p>যাঁরা নবমীর ভুরিভোজে অংশগ্রহণ করবেন, তাঁরা নিজের নাম ও পরিবারের সদস্য সংখ্যা লিখে নাম নথিভুক্ত করুন।</p>
           <form id="feastSignupForm" onsubmit="submitFeastSignup(event)" style="display:grid;gap:10px;max-width:520px">
@@ -1284,6 +1293,42 @@ async function loadFeastData(){
   renderFeastRows(rows);
   const active=document.getElementById("feastActive"),date=document.getElementById("feastCloseDate");
   if(active)active.value=String(settings.is_active!==false); if(date)date.value=settings.close_date||FEAST_CLOSE_DEFAULT;
+}
+function normalizeFeastPhone(value){
+  return String(value||'').replace(/\D/g,'').slice(-10);
+}
+
+async function searchFeastSignup(event){
+  event.preventDefault();
+  const input=document.getElementById('feastSearchPhone');
+  const msg=document.getElementById('feastSearchMessage');
+  const phone=normalizeFeastPhone(input?.value);
+  if(phone.length!==10){
+    if(msg){msg.style.color='#a00';msg.textContent='সঠিক ১০ সংখ্যার মোবাইল নম্বর লিখুন।';}
+    return;
+  }
+  if(msg){msg.style.color='#555';msg.textContent='খোঁজা হচ্ছে...';}
+
+  // নিরাপদ RPC ব্যবহার করা হচ্ছে। Public user পুরো তালিকা দেখতে পারবে না;
+  // শুধু নিজের দেওয়া মোবাইল নম্বরের মিল থাকা রেকর্ড ফেরত আসবে।
+  const result=await supabaseClient.rpc('search_feast_signup_by_phone',{search_phone:phone});
+  if(result.error){
+    if(msg){
+      msg.style.color='#a00';
+      msg.textContent='সার্চ করা যাচ্ছে না। অ্যাডমিনকে Supabase SQL সেটআপ করতে হবে।';
+      console.error('Feast search error:',result.error);
+    }
+    return;
+  }
+  const found=Array.isArray(result.data) ? result.data[0] : result.data;
+  if(found){
+    if(msg){
+      msg.style.color='#087f5b';
+      msg.innerHTML='✅ এই মোবাইল নম্বর দিয়ে নাম আগে নথিভুক্ত করা হয়েছে।<br>নাম: '+escapeHtml(found.name||'—')+'<br>কুপন নম্বর: '+escapeHtml(found.coupon_no||'—')+'<br>পরিবারের সদস্য: '+bnNumber(found.family_count||0)+' জন';
+    }
+  }else{
+    if(msg){msg.style.color='#a00';msg.textContent='❌ এই মোবাইল নম্বর দিয়ে এখনও কোনো নাম নথিভুক্ত পাওয়া যায়নি।';}
+  }
 }
 async function submitFeastSignup(event){
   event.preventDefault();
