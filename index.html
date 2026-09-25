@@ -145,6 +145,18 @@ nav { position: sticky; top: 0; z-index: 1000; }
   #printOnlyCoupon .coupon-actions{display:none!important}
   #printOnlyCoupon .coupon-line{break-inside:avoid!important;page-break-inside:avoid!important}
 }
+
+/* Member photo lightbox */
+.member-photo-trigger{cursor:zoom-in;transition:transform .18s ease,box-shadow .18s ease}
+.member-photo-trigger:hover{transform:scale(1.04);box-shadow:0 4px 14px #0003}
+.photo-lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:3000;align-items:center;justify-content:center;padding:20px}
+.photo-lightbox.open{display:flex}
+.photo-lightbox-content{position:relative;max-width:92vw;max-height:88vh;text-align:center}
+.photo-lightbox-content img{display:block;max-width:92vw;max-height:78vh;width:auto;height:auto;object-fit:contain;border:5px solid #fff;border-radius:14px;box-shadow:0 8px 35px #0008}
+.photo-lightbox-name{color:#fff;font-weight:800;font-size:18px;margin-top:10px}
+.photo-lightbox-close{position:absolute;right:-10px;top:-18px;width:38px;height:38px;border:0;border-radius:50%;background:#fff;color:#7d0f18;font-size:26px;font-weight:900;cursor:pointer;line-height:1}
+@media(max-width:720px){.photo-lightbox{padding:12px}.photo-lightbox-content img{max-width:94vw;max-height:72vh}.photo-lightbox-name{font-size:16px}.photo-lightbox-close{right:-3px;top:-15px}}
+
 </style>
 </head>
 <body>
@@ -156,7 +168,7 @@ nav { position: sticky; top: 0; z-index: 1000; }
     <div>
       <h1>উত্তর নীলাচল সর্বজনীন দুর্গোৎসব কমিটি</h1>
       <h2>Uttar Nilachal Sarbojonin Durga Utsav Committee</h2>
-      <p>স্থাপিত: ১৯৯৩ | North Nilachal, Birati, Kolkata - 134</p>
+      <p>স্থাপিত: ১৯৯৩ | <span id="publicFestivalYear">৩৪তম বর্ষ</span> | North Nilachal, Birati, Kolkata - 134</p>
     </div>
     <div class="durga-art">🌺</div>
   </div>
@@ -288,6 +300,7 @@ nav { position: sticky; top: 0; z-index: 1000; }
     <div class="admin-grid">
       <div><label>সাইটের শিরোনাম</label><input id="settingSiteTitle" value="উত্তর নীলাচল সর্বজনীন দুর্গোৎসব কমিটি"></div>
       <div><label>ইমেইল</label><input id="settingEmail" value="uttarnilachal.sarbojonin@gmail.com"></div>
+      <div><label>পূজার বর্ষ</label><input id="settingFestivalYear" value="৩৪তম বর্ষ" placeholder="যেমন: ৩৪তম বর্ষ"></div>
       <div style="grid-column:1/-1"><label>পরিচিতি</label><textarea id="settingAbout" rows="3">উত্তর নীলাচল সর্বজনীন দুর্গোৎসব কমিটি একটি সামাজিক ও সাংস্কৃতিক সংগঠন।</textarea></div>
       <div><label>QR Code ছবি (সর্বোচ্চ ৫০ KB)</label><input id="qrCodeFile" type="file" accept="image/*"></div>
       <div><label>QR Code URL (ঐচ্ছিক)</label><input id="qrCodeUrl" placeholder="https://..."></div>
@@ -371,7 +384,10 @@ nav { position: sticky; top: 0; z-index: 1000; }
 </section>
 
 <footer class="footer" id="contact"><div class="container footer-grid">
-  <div><h3>উত্তর নীলাচল সর্বজনীন দুর্গোৎসব কমিটি</h3><p>North Nilachal, Birati, Kolkata - 134</p><p>Email: uttarnilachal.sarbojonin@gmail.com</p><div class="social"><span>f</span><span>▶</span><span>☘</span></div></div>
+  <div><h3>উত্তর নীলাচল সর্বজনীন দুর্গোৎসব কমিটি</h3><p>North Nilachal, Birati, Kolkata - 134</p><p>Email: uttarnilachal.sarbojonin@gmail.com</p><div class="social">
+  <a href="https://www.facebook.com/share/19GC4J366b/" target="_blank" rel="noopener noreferrer" aria-label="Facebook খুলুন"><span>f</span></a>
+  <span>▶</span><span>☘</span>
+</div></div>
   <div><h3>গুরুত্বপূর্ণ লিংক</h3><p><a href="#about">আমাদের কথা</a></p><p><a href="#events">অনুষ্ঠানসূচি</a></p><p><a href="#gallery" onclick="revealGallery()">ছবির গ্যালারি</a></p></div>
   <div><h3>যোগাযোগ</h3><p>📍 North Nilachal, Birati</p><p>📧 Email: uttarnilachal.sarbojonin@gmail.com</p>
     <div style="margin-top:12px;display:grid;gap:10px">
@@ -701,13 +717,14 @@ function setPublicClubLink(value){
 }
 async function loadPublicSettings(){
   try{
-    const {data,error}=await supabaseClient.from("site_settings").select("site_key,site_value").in("site_key",["site_title","about_text","email","address","club_link"]);
+    const {data,error}=await supabaseClient.from("site_settings").select("site_key,site_value").in("site_key",["site_title","about_text","email","address","club_link","festival_year"]);
     if(error) throw error;
     (data||[]).forEach(x=>{
       const v = x.site_value && typeof x.site_value === "object" ? (x.site_value.value || "") : (x.site_value || "");
       if(x.site_key === "about_text" && v) applyAboutText(v);
       if(x.site_key === "club_link") setPublicClubLink(v);
       if(x.site_key === "site_title" && v) document.title=v;
+      if(x.site_key === "festival_year" && v) applyFestivalYear(v);
     });
   }catch(e){ console.warn("Public settings load error:", e.message); }
 }
@@ -719,13 +736,20 @@ async function saveAllSettings(){
       upsertSetting("site_title",document.getElementById("settingSiteTitle").value.trim()),
       upsertSetting("about_text",document.getElementById("settingAbout").value.trim()),
       upsertSetting("email",document.getElementById("settingEmail").value.trim()),
+      upsertSetting("festival_year",document.getElementById("settingFestivalYear").value.trim()),
       upsertSetting("address",document.getElementById("settingAddress").value.trim()),
       upsertSetting("club_link",document.getElementById("settingClubLink").value.trim())
     ]);
     applyAboutText(document.getElementById("settingAbout").value);
+    applyFestivalYear(document.getElementById("settingFestivalYear").value.trim());
     setPublicClubLink(document.getElementById("settingClubLink").value.trim());
     alert("✅ সেটিংস সেভ হয়েছে।");
   }catch(e){alert("সেভ হয়নি: "+e.message)}
+}
+function applyFestivalYear(value){
+  const text = String(value || "").trim();
+  const target = document.getElementById("publicFestivalYear");
+  if(target) target.textContent = text || "৩৪তম বর্ষ";
 }
 function applyAboutText(value){
   const text = String(value || "").trim();
@@ -756,6 +780,10 @@ async function loadAllSettings(){
       applyAboutText(v);
     }
     if(x.site_key==="email")document.getElementById("settingEmail").value=v;
+    if(x.site_key==="festival_year"){
+      document.getElementById("settingFestivalYear").value=v || "৩৪তম বর্ষ";
+      applyFestivalYear(v);
+    }
     if(x.site_key==="address")document.getElementById("settingAddress").value=v;
     if(x.site_key==="club_link"){document.getElementById("settingClubLink").value=v;setPublicClubLink(v);}
   });
@@ -1136,11 +1164,36 @@ async function saveMember(){
     alert("সদস্য সেভ হয়নি: "+(error?.message||error));
   }
 }
+function openMemberPhoto(url,name){
+  if(!url)return;
+  const box=document.getElementById("memberPhotoLightbox");
+  const img=document.getElementById("memberLightboxImage");
+  const title=document.getElementById("memberLightboxName");
+  if(!box||!img)return;
+  img.src=url;
+  img.alt=name||"সদস্যের ছবি";
+  if(title)title.textContent=name||"";
+  box.classList.add("open");
+  document.body.style.overflow="hidden";
+}
+function closeMemberPhoto(event){
+  if(event && event.target && event.target.closest(".photo-lightbox-content") && !event.target.closest(".photo-lightbox-close"))return;
+  const box=document.getElementById("memberPhotoLightbox");
+  const img=document.getElementById("memberLightboxImage");
+  if(box)box.classList.remove("open");
+  if(img)img.src="";
+  document.body.style.overflow="";
+}
+document.addEventListener("keydown",function(event){
+  if(event.key==="Escape")closeMemberPhoto();
+});
 function memberCardHtml(x){
+  const safeUrl=escapeHtml(x.photo_url||"");
+  const safeName=escapeHtml(x.name||"");
   const photo=x.photo_url
-    ? `<img src="${escapeHtml(x.photo_url)}" alt="${escapeHtml(x.name)}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`
+    ? `<img class="member-photo-trigger" src="${safeUrl}" alt="${safeName}" title="বড় করে দেখতে চাপুন" onclick="openMemberPhoto('${safeUrl.replace(/'/g,"&#39;")}','${safeName.replace(/'/g,"&#39;")}')" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`
     : "👨";
-  return `<div class="member"><div class="avatar" style="overflow:hidden">${photo}</div><b>${escapeHtml(x.name)}</b><small>${escapeHtml(x.role||"")}</small></div>`;
+  return `<div class="member"><div class="avatar" style="overflow:hidden">${photo}</div><b>${safeName}</b><small>${escapeHtml(x.role||"")}</small></div>`;
 }
 async function loadMembers(){
   const {data,error}=await supabaseClient.from("committee_members").select("*").order("created_at",{ascending:true});
@@ -1520,5 +1573,15 @@ document.addEventListener("click", function(e){
   }
 }, true);
 </script>
+
+<!-- Member photo lightbox -->
+<div class="photo-lightbox" id="memberPhotoLightbox" role="dialog" aria-modal="true" aria-label="সদস্যের বড় ছবি" onclick="closeMemberPhoto(event)">
+  <div class="photo-lightbox-content">
+    <button class="photo-lightbox-close" type="button" aria-label="বন্ধ করুন" onclick="closeMemberPhoto()">×</button>
+    <img id="memberLightboxImage" src="" alt="সদস্যের ছবি">
+    <div id="memberLightboxName" class="photo-lightbox-name"></div>
+  </div>
+</div>
+
 </body>
 </html>
